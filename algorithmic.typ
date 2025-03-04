@@ -8,11 +8,11 @@
  */
 
 #let ast_to_content_list(indent, ast) = {
-    if type(ast) == "array" {
+    if type(ast) == array {
         ast.map(d => ast_to_content_list(indent, d))
-    } else if type(ast) == "content" {
+    } else if type(ast) == content {
         (pad(left: indent * 0.5em, ast),)
-    } else if type(ast) == "dictionary" {
+    } else if type(ast) == dictionary {
         let new_indent = ast.at("change_indent", default: 0) + indent
         ast_to_content_list(new_indent, ast.body)
     }
@@ -48,7 +48,7 @@
 )
 
 #let listify(v) = {
-    if type(v) == "list" {
+    if type(v) == array {
         v
     } else {
         (v,)
