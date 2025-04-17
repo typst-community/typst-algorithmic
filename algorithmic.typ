@@ -55,7 +55,7 @@
   )
 }
 
-#let iflike_block(kw1: "", kw2: "", kw3: "", cond: "", ..body) = (
+#let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
   (strong(kw1) + " " + cond + " " + strong(kw2)),
   // XXX: .pos annoys me here
   (change_indent: 4, body: body.pos()),
@@ -70,7 +70,7 @@
   }
 }
 #let function_like(name, kw: "function", args: (), ..body) = (
-  iflike_block(kw1: kw, kw3: "end", cond: (smallcaps(name) + $(#arraify(args).join(", "))$), ..body)
+  iflike_block(kw1: kw, kw3: "end", (smallcaps(name) + $(#arraify(args).join(", "))$), ..body)
 )
 
 #let Function = function_like.with(kw: "function")
