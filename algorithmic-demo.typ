@@ -25,7 +25,7 @@
               Assign[$l$][$m + 1$]
             },
           )
-          ElsIf(
+          ElseIf(
             cond: [$A ["mid"] > v$],
             {
               Assign[$r$][$m - 1$]

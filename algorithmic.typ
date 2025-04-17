@@ -17,7 +17,6 @@
     ast_to_content_list(new_indent, ast.body)
   }
 }
-
 #let algorithm(title, supplement: "Algorithm", ..bits) = {
   let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
   let table_bits = ()
@@ -54,14 +53,12 @@
     ),
   )
 }
-
 #let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
   (strong(kw1) + " " + cond + " " + strong(kw2)),
   // XXX: .pos annoys me here
   (change_indent: 4, body: body.pos()),
   strong(kw3),
 )
-
 #let arraify(v) = {
   if type(v) == array {
     v
@@ -69,30 +66,41 @@
     (v,)
   }
 }
-#let function_like(name, kw: "function", args: (), ..body) = (
-  iflike_block(kw1: kw, kw3: "end", (smallcaps(name) + $(#arraify(args).join(", "))$), ..body)
+#let call(name, kw: "function", inline: false, style: smallcaps, args, ..body) = (
+  if inline {
+    [#style(name)\(#arraify(args).join(", ")\)]
+  } else {
+    iflike_block(kw1: kw, kw3: "end", (style(name) + $(#arraify(args).join(", "))$), ..body)
+  }
 )
 
-#let Function = function_like.with(kw: "function")
-#let Procedure = function_like.with(kw: "procedure")
+// Named blocks
+#let Function = call.with(kw: "function")
+#let Procedure = call.with(kw: "procedure")
 
+// Misc
 #let State(block) = ((body: block),)
 #let LineBreak = State[]
 
 /// Inline call
-#let CallInline(name, args) = [#smallcaps(name)$(#arraify(args).join(", "))$]
-#let Call(..args) = (CallInline(..args),)
-#let FnInline(f, args) = [#strong(f)$(#arraify(args).join(", "))$]
-#let Fn(..args) = (FnInline(..args),)
+#let CallInline(name, args) = call(inline: true, name, args)
+#let FnInline(f, args) = call(inline: true, style: strong, f, args)
 #let CommentInline(c) = sym.triangle.stroked.r + " " + c
+
+// Block calls
+#let Call(..args) = (CallInline(..args),)
+#let Fn(..args) = (FnInline(..args),)
 #let Comment(c) = (CommentInline(c),)
-// It kind of sucks that Else is a separate block but it's fine
+#let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)],)
+
+// Control flow
 #let If = iflike_block.with(kw1: "if", kw2: "then", kw3: "end")
 #let While = iflike_block.with(kw1: "while", kw2: "do", kw3: "end")
 #let For = iflike_block.with(kw1: "for", kw2: "do", kw3: "end")
-#let Assign(var, val) = (var + " " + $<-$ + " " + val,)
-
 #let Else = iflike_block.with(kw1: "else", kw3: "end")
-#let ElsIf = iflike_block.with(kw1: "else if", kw2: "then", kw3: "end")
-#let ElseIf = ElsIf
+#let ElseIf = iflike_block.with(kw1: "else if", kw2: "then", kw3: "end")
+
+// Instructions
+#let Assign(var, val) = (var + " " + $<-$ + " " + val,)
 #let Return(arg) = (strong("return") + " " + arg,)
+#let Terminate = (smallcaps("terminate"),)
