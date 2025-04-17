@@ -8,11 +8,11 @@
  */
 
 #let ast_to_content_list(indent, ast) = {
-    if type(ast) == "array" {
+    if type(ast) == array {
         ast.map(d => ast_to_content_list(indent, d))
-    } else if type(ast) == "content" {
+    } else if type(ast) == content {
         (pad(left: indent * 0.5em, ast),)
-    } else if type(ast) == "dictionary" {
+    } else if type(ast) == dictionary {
         let new_indent = ast.at("change_indent", default: 0) + indent
         ast_to_content_list(new_indent, ast.body)
     }
@@ -37,10 +37,11 @@
     )
 }
 
-#let iflike_block(kw1: "", kw2: "", cond: "", ..body) = (
+#let iflike_block(kw1: "", kw2: "", kw3: "", cond: "", ..body) = (
     (strong(kw1) + " " + cond + " " + strong(kw2)),
     // XXX: .pos annoys me here
-    (change_indent: 4, body: body.pos())
+    (change_indent: 4, body: body.pos()),
+    (strong(kw3),),
 )
 
 #let function_like(name, kw: "function", args: (), ..body) = (
@@ -48,7 +49,7 @@
 )
 
 #let listify(v) = {
-    if type(v) == "list" {
+    if type(v) == list {
         v
     } else {
         (v,)
@@ -68,12 +69,12 @@
 #let Ic(c) = sym.triangle.stroked.r + " " + c
 #let Cmt(c) = (Ic(c),)
 // It kind of sucks that Else is a separate block but it's fine
-#let If = iflike_block.with(kw1: "if", kw2: "then")
-#let While = iflike_block.with(kw1: "while", kw2: "do")
-#let For = iflike_block.with(kw1: "for", kw2: "do")
+#let If = iflike_block.with(kw1: "if", kw2: "then", kw3: "end")
+#let While = iflike_block.with(kw1: "while", kw2: "do", kw3: "end")
+#let For = iflike_block.with(kw1: "for", kw2: "do", kw3: "end")
 #let Assign(var, val) = (var + " " + $<-$ + " " + val,)
 
-#let Else = iflike_block.with(kw1: "else")
-#let ElsIf = iflike_block.with(kw1: "else if", kw2: "then")
+#let Else = iflike_block.with(kw1: "else", kw3: "end")
+#let ElsIf = iflike_block.with(kw1: "else if", kw2: "then", kw3: "end")
 #let ElseIf = ElsIf
 #let Return(arg) = (strong("return") + " " + arg,)
