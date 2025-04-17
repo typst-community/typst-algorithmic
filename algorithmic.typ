@@ -18,7 +18,7 @@
   }
 }
 
-#let algorithm(..bits) = {
+#let algorithm(title, supplement: "Algorithm", ..bits) = {
   let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
   let table_bits = ()
   let lineno = 1
@@ -28,12 +28,30 @@
     table_bits.push(content.at(lineno - 1))
     lineno = lineno + 1
   }
-  table(
-    columns: (18pt, 100%),
-    // line spacing
-    inset: 0.4em,
-    stroke: none,
-    ..table_bits
+  show figure.where(kind: "algorithm"): it => {
+    set align(left)
+    table(
+      columns: 1,
+      stroke: none,
+      table.hline(),
+      strong(it.caption),
+      table.hline(),
+      it.body,
+      table.hline(),
+    )
+  }
+  figure(
+    supplement: supplement,
+    kind: "algorithm",
+    caption: title,
+    placement: none,
+    table(
+      columns: (18pt, 100%),
+      // line spacing
+      inset: 0.4em,
+      stroke: none,
+      ..table_bits
+    ),
   )
 }
 
@@ -41,7 +59,7 @@
   (strong(kw1) + " " + cond + " " + strong(kw2)),
   // XXX: .pos annoys me here
   (change_indent: 4, body: body.pos()),
-  (strong(kw3),),
+  strong(kw3),
 )
 
 #let arraify(v) = {
@@ -52,7 +70,7 @@
   }
 }
 #let function_like(name, kw: "function", args: (), ..body) = (
-  iflike_block(kw1: kw, cond: (smallcaps(name) + $(#arraify(args).join(", "))$), ..body)
+  iflike_block(kw1: kw, kw3: "end", cond: (smallcaps(name) + $(#arraify(args).join(", "))$), ..body)
 )
 
 #let Function = function_like.with(kw: "function")
