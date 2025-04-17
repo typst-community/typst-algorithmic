@@ -77,14 +77,15 @@
 #let Procedure = function_like.with(kw: "procedure")
 
 #let State(block) = ((body: block),)
+#let LineBreak = State[]
 
 /// Inline call
-#let CallI(name, args) = [#smallcaps(name)$(#arraify(args).join(", "))$]
-#let Call(..args) = (CallI(..args),)
-#let FnI(f, args) = [#strong(f)$(#arraify(args).join(", "))$]
-#let Fn(..args) = (FnI(..args),)
-#let Ic(c) = sym.triangle.stroked.r + " " + c
-#let Cmt(c) = (Ic(c),)
+#let CallInline(name, args) = [#smallcaps(name)$(#arraify(args).join(", "))$]
+#let Call(..args) = (CallInline(..args),)
+#let FnInline(f, args) = [#strong(f)$(#arraify(args).join(", "))$]
+#let Fn(..args) = (FnInline(..args),)
+#let CommentInline(c) = sym.triangle.stroked.r + " " + c
+#let Comment(c) = (CommentInline(c),)
 // It kind of sucks that Else is a separate block but it's fine
 #let If = iflike_block.with(kw1: "if", kw2: "then", kw3: "end")
 #let While = iflike_block.with(kw1: "while", kw2: "do", kw3: "end")
