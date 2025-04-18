@@ -17,16 +17,7 @@
     ast_to_content_list(new_indent, ast.body)
   }
 }
-#let algorithm(title, supplement: "Algorithm", ..bits) = {
-  let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
-  let table_bits = ()
-  let lineno = 1
-
-  while lineno <= content.len() {
-    table_bits.push([#lineno:])
-    table_bits.push(content.at(lineno - 1))
-    lineno = lineno + 1
-  }
+#let style-algorithm = it => {
   show figure.where(kind: "algorithm"): it => {
     set align(left)
     table(
@@ -38,6 +29,18 @@
       it.body,
       table.hline(),
     )
+  }
+  it
+}
+#let algorithm(title, supplement: "Algorithm", ..bits) = {
+  let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
+  let table_bits = ()
+  let lineno = 1
+
+  while lineno <= content.len() {
+    table_bits.push([#lineno:])
+    table_bits.push(content.at(lineno - 1))
+    lineno = lineno + 1
   }
   figure(
     supplement: supplement,
