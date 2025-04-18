@@ -32,7 +32,7 @@
   }
   it
 }
-#let algorithm(title, supplement: "Algorithm", ..bits) = {
+#let algorithm(title, supplement: "Algorithm", inset: 0.2em, ..bits) = {
   let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
   let table_bits = ()
   let lineno = 1
@@ -50,7 +50,7 @@
     table(
       columns: (18pt, 100%),
       // line spacing
-      inset: 0.4em,
+      inset: inset,
       stroke: none,
       ..table_bits
     ),
