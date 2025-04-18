@@ -55,9 +55,24 @@
 }
 #let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
   (strong(kw1) + " " + cond + " " + strong(kw2)),
-  // XXX: .pos annoys me here
   (change_indent: 4, body: body.pos()),
   strong(kw3),
+)
+#let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", cond, ..body) = (
+  (strong(kw1) + " " + cond + " " + strong(kw2)),
+  (change_indent: 4, body: body.pos()),
+  strong(kw3),
+)
+#let iflike_block_without_kw3(kw1: "", kw2: "", cond, ..body) = (
+  (strong(kw1) + " " + cond + " " + strong(kw2)),
+  (change_indent: 4, body: body.pos()),
+)
+#let iflike_block(kw1: "", kw2: "", kw3: none, cond, ..body) = (
+  if kw3 == "" or kw3 == none {
+    iflike_block_without_kw3(kw1: kw1, kw2: kw2, cond, ..body)
+  } else {
+    iflike_block_with_kw3(kw1: kw1, kw2: kw2, kw3: kw3, cond, ..body)
+  }
 )
 #let arraify(v) = {
   if type(v) == array {
@@ -97,8 +112,35 @@
 #let If = iflike_block.with(kw1: "if", kw2: "then", kw3: "end")
 #let While = iflike_block.with(kw1: "while", kw2: "do", kw3: "end")
 #let For = iflike_block.with(kw1: "for", kw2: "do", kw3: "end")
-#let Else = iflike_block.with(kw1: "else", kw3: "end")
+#let Else = iflike_block.with(kw1: "else", kw2: "", kw3: "end", "")
 #let ElseIf = iflike_block.with(kw1: "else if", kw2: "then", kw3: "end")
+#let IfElseChain(..conditions_and_bodies) = {
+  let result = ()
+  let conditions_and_bodies = conditions_and_bodies.pos()
+  let len = conditions_and_bodies.len()
+  let i = 0
+
+  while i < len {
+    if i == len - 1 and calc.odd(len) {
+      // Last element is the "else" block
+      result.push(Else(..arraify(conditions_and_bodies.at(i))))
+    } else if calc.even(i) {
+      // Condition
+      let cond = conditions_and_bodies.at(i)
+      let body = arraify(conditions_and_bodies.at(i + 1))
+      if i + 2 == len {
+        // No "else" or "else if" after this
+        result.push(If(cond, ..body, kw3: "end"))
+      } else {
+        result.push(If(cond, ..body, kw3: ""))
+      }
+    } else {
+      // Skip body since it's already processed
+    }
+    i = i + 1
+  }
+  result
+}
 
 // Instructions
 #let Assign(var, val) = (var + " " + $<-$ + " " + val,)
