@@ -131,11 +131,15 @@
       // Condition
       let cond = conditions_and_bodies.at(i)
       let body = arraify(conditions_and_bodies.at(i + 1))
-      if i + 2 == len {
-        // No "else" or "else if" after this
-        result.push(If(cond, ..body, kw3: "end"))
-      } else {
+      if i == 0 {
+        // First condition is a regular "if"
         result.push(If(cond, ..body, kw3: ""))
+      } else if i + 2 == len {
+        // Last condition before "else" is an "elseif" with "end"
+        result.push(ElseIf(cond, ..body, kw3: "end"))
+      } else {
+        // Intermediate conditions are "elseif" without "end"
+        result.push(ElseIf(cond, ..body, kw3: ""))
       }
     } else {
       // Skip body since it's already processed
