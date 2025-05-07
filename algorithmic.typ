@@ -18,6 +18,7 @@
   }
 }
 #let style-algorithm = it => {
+  show figure: set block(breakable: true)
   show figure.where(kind: "algorithm"): it => {
     set align(left)
     table(
@@ -58,17 +59,17 @@
 }
 #let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
   (strong(kw1) + " " + cond + " " + strong(kw2)),
-  (change_indent: 4, body: body.pos()),
+  (change_indent: 2, body: body.pos()),
   strong(kw3),
 )
 #let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", cond, ..body) = (
   (strong(kw1) + " " + cond + " " + strong(kw2)),
-  (change_indent: 4, body: body.pos()),
+  (change_indent: 2, body: body.pos()),
   strong(kw3),
 )
 #let iflike_block_without_kw3(kw1: "", kw2: "", cond, ..body) = (
   (strong(kw1) + " " + cond + " " + strong(kw2)),
-  (change_indent: 4, body: body.pos()),
+  (change_indent: 2, body: body.pos()),
 )
 #let iflike_block(kw1: "", kw2: "", kw3: none, cond, ..body) = (
   if kw3 == "" or kw3 == none {
