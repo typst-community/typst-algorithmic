@@ -154,3 +154,4 @@
 #let Assign(var, val) = (var + " " + $<-$ + " " + val,)
 #let Return(arg) = (strong("return") + " " + arg,)
 #let Terminate = (smallcaps("terminate"),)
+#let Break = (smallcaps("break"),)
