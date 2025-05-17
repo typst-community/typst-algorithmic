@@ -1,6 +1,8 @@
 <!--
 SPDX-FileCopyrightText: 2023 Jade Lovelace
-
+SPDX-FileCopyrightText: 2025 Pascal Quach
+SPDX-FileCopyrightText: 2025 Typst Community
+SPDX-FileCopyrightText: 2025 Contributors to the typst-algorithmic project
 SPDX-License-Identifier: MIT
 -->
 
@@ -22,25 +24,34 @@ Example:
 
 #algorithm({
   import algorithmic: *
-  Function("Binary-Search", args: ("A", "n", "v"), {
-    Cmt[Initialize the search range]
-    Assign[$l$][$1$]
-    Assign[$r$][$n$]
-    State[]
-    While(cond: $l <= r$, {
-      Assign([mid], FnI[floor][$(l + r)/2$])
-      If(cond: $A ["mid"] < v$, {
-        Assign[$l$][$m + 1$]
-      })
-      ElsIf(cond: [$A ["mid"] > v$], {
-        Assign[$r$][$m - 1$]
-      })
-      Else({
-        Return[$m$]
-      })
-    })
-    Return[*null*]
-  })
+  Procedure(
+    "Binary-Search",
+    ("A", "n", "v"),
+    {
+      Comment[Initialize the search range]
+      Assign[$l$][$1$]
+      Assign[$r$][$n$]
+      LineBreak
+      While(
+        $l <= r$,
+        {
+          Assign([mid], FnInline[floor][$(l + r) / 2$])
+          IfElseChain(
+            $A ["mid"] < v$,
+            {
+              Assign[$l$][$m + 1$]
+            },
+            [$A ["mid"] > v$],
+            {
+              Assign[$r$][$m - 1$]
+            },
+            Return[$m$],
+          )
+        },
+      )
+      Return[*null*]
+    },
+  )
 })
 ```
 
@@ -53,6 +64,9 @@ Currently this library is not really customizable. Please vendor it and hack it
 up as needed then file an issue for the customization option you're missing.
 
 ## Reference
+
+> [!CAUTION]
+> The documentation below is outdated.
 
 #### stmt
 

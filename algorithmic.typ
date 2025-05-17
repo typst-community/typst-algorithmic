@@ -1,5 +1,7 @@
 // SPDX-FileCopyrightText: 2023 Jade Lovelace
-//
+// SPDX-FileCopyrightText: 2025 Pascal Quach
+// SPDX-FileCopyrightText: 2025 Typst Community
+// SPDX-FileCopyrightText: 2025 Contributors to the typst-algorithmic project
 // SPDX-License-Identifier: MIT
 
 /*
@@ -33,7 +35,7 @@
   }
   it
 }
-#let algorithm(title, supplement: "Algorithm", inset: 0.2em, ..bits) = {
+#let algorithm(inset: 0.2em, ..bits) = {
   let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
   let table_bits = ()
   let lineno = 1
@@ -43,18 +45,21 @@
     table_bits.push(content.at(lineno - 1))
     lineno = lineno + 1
   }
-  figure(
+  return table(
+    columns: (18pt, 100%),
+    // line spacing
+    inset: inset,
+    stroke: none,
+    ..table_bits
+  )
+}
+#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, ..bits) = {
+  return figure(
     supplement: supplement,
     kind: "algorithm",
     caption: title,
     placement: none,
-    table(
-      columns: (18pt, 100%),
-      // line spacing
-      inset: inset,
-      stroke: none,
-      ..table_bits
-    ),
+    algorithm(inset: inset, ..bits),
   )
 }
 #let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
