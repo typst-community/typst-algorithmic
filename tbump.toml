@@ -28,9 +28,6 @@ src = "justfile"
 [[file]]
 src = "README.md"
 
-[[file]]
-src = "docs/*.typ"
-
 [[before_commit]]
 name = "tests"
 cmd = "just test"
