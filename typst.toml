@@ -10,7 +10,21 @@ keywords = ["algorithm", "pseudocode", "procedure"]
 categories = ["components", "visualization"]
 disciplines = ["computer-science", "mathematics"]
 compiler = "0.13.0"
-exclude = ["docs", "tests", "tbump.toml", ".gitignore", ".git"]
+exclude = [
+  "docs/*.typ",
+  "docs/*.pdf",
+  "tests/**/out",
+  "tests/**/diff",
+  "tests/**/*.typ",
+  "tbump.toml",
+  "justfile",
+  ".gitignore",
+  ".git",
+  ".gtm",
+  ".vscode",
+  ".reuse",
+  "package.sh"
+]
 
 [tool.tytanic]
 default.ppi = 1200
