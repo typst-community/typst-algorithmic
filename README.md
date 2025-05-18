@@ -152,7 +152,7 @@ If($x < y$, {
 ```
 
 </td>
-<td><img src="./tests/if/ref/1.png" alt="image of an if statement with condition x < y and conditional statement assign y to x"></td>
+<td><img src="./tests/if/ref/1.png" alt="image of an if statement with condition x < y and conditional statement assign y to x" width="500"></td>
 </tr>
 <tr>
 <td><code>ElseIf</code></td>
@@ -166,7 +166,7 @@ ElseIf($x > y$, {
 ```
 
 </td>
-<td><img src="./tests/elseif/ref/1.png" alt="image of an elseif statement with condition x > y and conditional statement assign x to y"></td>
+<td><img src="./tests/elseif/ref/1.png" alt="image of an elseif statement with condition x > y and conditional statement assign x to y" width="500"></td>
 </tr>
 <tr>
 <td><code>Else</code></td>
@@ -180,7 +180,7 @@ Else({
 ```
 
 </td>
-<td><img src="./tests/else/ref/1.png" alt="image of an else statement with conditional statement return y"></td>
+<td><img src="./tests/else/ref/1.png" alt="image of an else statement with conditional statement return y" width="500"></td>
 </tr>
 <tr>
 <td><code>While</code></td>
@@ -194,7 +194,7 @@ While($i < 10$, {
 ```
 
 </td>
-<td><img src="./tests/while/ref/1.png" alt="image of a while statement with condition i < 10 and conditional statement assign i + 1 to i"></td>
+<td><img src="./tests/while/ref/1.png" alt="image of a while statement with condition i < 10 and conditional statement assign i + 1 to i" width="500"></td>
 </tr>
 <tr>
 <td><code>For</code></td>
@@ -208,7 +208,7 @@ For($i <= 10$, {
 ```
 
 </td>
-<td><img src="./tests/for/ref/1.png" alt="image of a for loop with condition i <= 10 and conditional statement assign i to x_i"></td>
+<td><img src="./tests/for/ref/1.png" alt="image of a for loop with condition i <= 10 and conditional statement assign i to x_i" width="500"></td>
 </tr>
 <tr>
 <td><code>IfElseChain</code></td>
@@ -230,7 +230,7 @@ IfElseChain( // Alternating content and bits
 ```
 
 </td>
-<td><img src="./tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x > y and conditional statement assign x to y and else statement return y"></td>
+<td><img src="./tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x  width="500"> y and conditional statement assign x to y and else statement return y"></td>
 </tr>
 </tbody>
 </table>
@@ -262,7 +262,7 @@ Assign[$a$][$b$]
 ```
 
 </td>
-<td><img src="./tests/function/ref/1.png" alt="image of a function definition with name 'Add' and arguments 'a' and 'b' with body 'return a+b'"></td>
+<td><img src="./tests/function/ref/1.png" alt="image of a function definition with name 'Add' and arguments 'a' and 'b' with body 'return a+b'" width="500"></td>
 </tr>
 <tr>
 <td><code>Procedure</code></td>
@@ -276,7 +276,7 @@ Assign[$a$][$a+b$]
 ```
 
 </td>
-<td><img src="./tests/procedure/ref/1.png" alt="image of a procedure definition with name 'Add' and arguments 'a' and 'b' with body 'assign a+b to a'"></td>
+<td><img src="./tests/procedure/ref/1.png" alt="image of a procedure definition with name 'Add' and arguments 'a' and 'b' with body 'assign a+b to a'" width="500"></td>
 </tr>
 <tr>
 <td><code>Assign</code></td>
@@ -288,7 +288,7 @@ Assign[$x$][$y$]
 ```
 
 </td>
-<td><img src="./tests/assign/ref/1.png" alt="image of an assignment statement assigning y to x"></td>
+<td><img src="./tests/assign/ref/1.png" alt="image of an assignment statement assigning y to x" width="500"></td>
 </tr>
 <tr>
 <td><code>Return</code></td>
@@ -300,7 +300,7 @@ Return[$x$]
 ```
 
 </td>
-<td><img src="./tests/return/ref/1.png" alt="image of a return statement returning x"></td>
+<td><img src="./tests/return/ref/1.png" alt="image of a return statement returning x" width="500"></td>
 </tr>
 <tr>
 <td><code>Terminate</code></td>
@@ -312,7 +312,7 @@ Terminate[$x$]
 ```
 
 </td>
-<td><img src="./tests/terminate/ref/1.png" alt="image of a terminate statement terminating x"></td>
+<td><img src="./tests/terminate/ref/1.png" alt="image of a terminate statement terminating x" width="500"></td>
 </tr>
 <tr>
 <td><code>Break</code></td>
@@ -324,7 +324,7 @@ Break()
 ```
 
 </td>
-<td><img src="./tests/break/ref/1.png" alt="image of a break statement"></td>
+<td><img src="./tests/break/ref/1.png" alt="image of a break statement" width="500"></td>
 </tr>
 
 Users can also define their own commands using both `Call(..args)` and
@@ -372,7 +372,7 @@ Comment[This is a comment]
 ```
 
 </td>
-<td><img src="./tests/comment/ref/1.png" alt="image of a block comment with text 'This is a comment'"></td>
+<td><img src="./tests/comment/ref/1.png" alt="image of a block comment with text 'This is a comment'" width="500"></td>
 </tr>
 <tr>
 <td><code>CommentInline</code></td>
@@ -384,7 +384,7 @@ CommentInline[This is a comment]
 ```
 
 </td>
-<td><img src="./tests/commentinline/ref/1.png" alt="image of an inline comment with text 'This is a comment'"></td>
+<td><img src="./tests/commentinline/ref/1.png" alt="image of an inline comment with text 'This is a comment'" width="500"></td>
 </tr>
 <tr>
 <td><code>LineComment</code></td>
@@ -396,7 +396,7 @@ LineComment(Assign[a][1], [Initialize $a$ to 1])
 ```
 
 </td>
-<td><img src="./tests/linecomment/ref/1.png" alt="image of a line comment with text 'Initialize a to 1'"></td>
+<td><img src="./tests/linecomment/ref/1.png" alt="image of a line comment with text 'Initialize a to 1'" width="500"></td>
 </tr>
 </tbody>
 </table>
