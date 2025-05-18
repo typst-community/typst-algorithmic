@@ -14,7 +14,7 @@ for Typst. It's useful for writing pseudocode and typesetting it all nicely.
 [algorithmicx]: https://ctan.org/pkg/algorithmicx
 
 ![screenshot of the typst-algorithmic output, showing line numbers, automatic
-indentation, bolded keywords, and such](./docs/assets/demo-rendered.png)
+indentation, bolded keywords, and such](./docs/assets/algorithmic-demo.png)
 
 Example:
 
@@ -230,7 +230,7 @@ IfElseChain( // Alternating content and bits
 ```
 
 </td>
-<td><img src="./tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x  width="500"> y and conditional statement assign x to y and else statement return y"></td>
+<td><img src="./tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x" width="500"></td>
 </tr>
 </tbody>
 </table>
