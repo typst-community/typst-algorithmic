@@ -62,9 +62,6 @@ arrays gets those arrays joined together.
 
 ## Reference
 
-> [!CAUTION]
-> The documentation below is outdated.
-
 ### Documentation
 
 #### `algorithm(inset: 0.2em, ..bits)`
