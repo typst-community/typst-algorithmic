@@ -3,9 +3,9 @@
 // SPDX-FileCopyrightText: 2025 Typst Community
 // SPDX-FileCopyrightText: 2025 Contributors to the typst-algorithmic project
 // SPDX-License-Identifier: MIT
-
+#set page(height: auto)
 #import "../algorithmic.typ"
-#import algorithmic: algorithm-figure, style-algorithm
+#import algorithmic: algorithm, algorithm-figure, style-algorithm
 #show: style-algorithm
 #algorithm-figure(
   "Binary Search",

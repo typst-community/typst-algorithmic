@@ -32,5 +32,9 @@ src = "README.md"
 src = "docs/*.typ"
 
 [[before_commit]]
+name = "tests"
+cmd = "just test"
+
+[[before_commit]]
 name = "compile docs"
 cmd = "just docs"

@@ -60,90 +60,343 @@ arrays gets those arrays joined together.
 
 [CeTZ]: https://github.com/johannes-wolf/typst-canvas
 
-Currently this library is not really customizable. Please vendor it and hack it
-up as needed then file an issue for the customization option you're missing.
-
 ## Reference
 
 > [!CAUTION]
 > The documentation below is outdated.
 
-#### stmt
+### Documentation
 
-Statement-level contexts in `algorithmic` generally accept the type `body` in
-the following:
+#### `algorithm(inset: 0.2em, ..bits)`
 
+This is the main function of the package. It takes a list of arrays and
+returns a typesetting of the algorithm. You can modify the inset
+between lines with the `inset` parameter.
+
+```typst
+#algorithm(
+  inset: 1em, // more spacing between lines
+  { // provide an array
+    import algorithmic: * // import all names in the array
+    Assign[$x$][$y$]
+  },
+  { // provide another array
+    import algorithmic: *
+    Assign[$y$][$x$]
+  },
+  { // provide a third array
+    import algorithmic: *
+    Assign[$z$][$x + y$]
+  }
+)
 ```
-body = (ast|content)[] | ast | content
-ast = (change_indent: int, body: body)
+
+#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, ..bits)`
+
+The `algorithm-figure` function is a wrapper around `algorithm` that returns a
+figure element of the algorithm. It takes the same parameters as
+`algorithm`, but also takes a `title` and a `supplement` parameter for the figure.
+
+```typst
+#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, ..bits) = {
+  return figure(
+    supplement: supplement,
+    kind: "algorithm", // the kind of figure
+    caption: title,
+    placement: none,
+    algorithm(inset: inset, ..bits),
+  )
+}
 ```
 
-#### inline
+In order to use the `algorithm-figure` function, you need to style the figure
+with the `style-algorithm` show rule.
 
-Inline functions will generate plain content.
+```typst
+#import algorithmic: algorithm-figure, style-algorithm
+#show: style-algorithm // Do not forget!
+#algorithm-figure(
+  "Variable Assignement",
+  {
+    import algorithmic: *
+    Assign[$x$][$y$]
+  },
+)
+```
 
-#### `algorithmic(..bits)`
+#### Control flow
 
-Takes one or more lists of `ast` and creates an algorithmic block with line
-numbers.
+Algorithmic provides basic control flow statements: `If`, `While`, `For`,
+`Else`, `ElseIf`, and a `IfElseChain` utility.
 
-### Control flow
+<!-- Table -->
+<table>
+<thead>
+<tr>
+<th>Statement</th>
+<th>Description</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>If</code></td>
+<td><code>If(condition: content, ..bits)</code></td>
+<td>
 
-#### `Function`/`Procedure` (stmt)
+```typst
+If($x < y$, {
+  Assign[$x$][$y$]
+})
+```
 
-Defined as `f(name: string|content, args: content[]?, ..body)`. Body can be one or more `body`
-values.
+</td>
+<td><img src="./tests/if/ref/1.png" alt="if"></td>
+</tr>
+<tr>
+<td><code>ElseIf</code></td>
+<td><code>ElseIf(condition: content, ..bits)</code></td>
+<td>
 
-#### `If`/`ElseIf`/`Else`/`For`/`While` (stmt)
+```typst
+ElseIf($x > y$, {
+  Assign[$y$][$x$]
+})
+```
 
-Defined as `f(cond: string|content, ..body)`. Body can be one or more `body`
-values.
+</td>
+<td><img src="./tests/elseif/ref/1.png" alt="elseif"></td>
+</tr>
+<tr>
+<td><code>Else</code></td>
+<td><code>Else(..bits)</code></td>
+<td>
 
-Generates an indented block with the body, and the specified `cond` between the
-two keywords as condition.
+```typst
+Else({
+  Return[$y$]
+})
+```
 
-### Statements
+</td>
+<td><img src="./tests/else/ref/1.png" alt="else"></td>
+</tr>
+<tr>
+<td><code>While</code></td>
+<td><code>While(condition: content, ..bits)</code></td>
+<td>
 
-#### `Assign` (stmt)
+```typst
+While($i < 10$, {
+  Assign[$i$][$i + 1$]
+})
+```
 
-Defined as `Assign(var: content, val: content)`.
+</td>
+<td><img src="./tests/while/ref/1.png" alt="while"></td>
+</tr>
+<tr>
+<td><code>For</code></td>
+<td><code>For(condition: content, ..bits)</code></td>
+<td>
 
-Generates `#var <- #val`.
+```typst
+For($i <= 10$, {
+  Assign[$x_i$][$i$]
+})
+```
 
-#### `CallI` (inline), `Call` (stmt)
+</td>
+<td><img src="./tests/for/ref/1.png" alt="for"></td>
+</tr>
+<tr>
+<td><code>IfElseChain</code></td>
+<td><code>IfElseChain(..bits)</code></td>
+<td>
 
-Defined as `f(name, args: content|content[])`.
+```typst
+IfElseChain( // Alternating content and bits
+  $x < y$, // If: content 1 (condition)
+  { // Then: bits 1
+    Assign[$x$][$y$]
+  },
+  [$x > y$], // ElseIf: content 2 (condition)
+  { // Then: bits 2
+    Assign[$y$][$x$]
+  },
+  Return[$y$], // Else: content 3 (no more bits afterwards)
+)
+```
 
-Calls a function with the function name styled in smallcaps and the args joined by
-commas.
+</td>
+<td><img src="./tests/ifelsechain/ref/1.png" alt="ifelsechain"></td>
+</tr>
+</tbody>
+</table>
 
-#### `Cmt` (stmt)
+#### Commands
 
-Defined as `Cmt(body: content)`.
+The package provides a few commands: `Function`, `Procedure`, `Assign`,
+`Return`, `Terminate` and `Break`.
 
-Makes a line comment.
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Function</code></td>
+<td><code>Function(name, args, ..bits)</code>
+<td>
 
-#### `FnI` (inline), `Fn` (stmt)
+```typst
+Function("Add", ($a$, $b$), {
+Assign[$a$][$b$]
+})
+```
 
-Defined as `f(name, args: content|content[])`.
+</td>
+<td><img src="./tests/function/ref/1.png" alt="function"></td>
+</tr>
+<tr>
+<td><code>Procedure</code></td>
+<td><code>Procedure(name, args, ..bits)</code>
+<td>
 
-Calls a function with the function name styled in bold and the args joined by
-commas.
+```typst
+Procedure("Swap", ("a", "b"), {
+Assign[$a$][$b$]
+})
+```
 
-#### `Ic` (inline)
+</td>
+<td><img src="./tests/procedure/ref/1.png" alt="procedure"></td>
+</tr>
+<tr>
+<td><code>Assign</code></td>
+<td><code>Assign(var, value)</code>
+<td>
 
-Defined as `Ic(body: content) -> content`.
+```typst
+Assign[$x$][$y$]
+```
 
-Makes an inline comment.
+</td>
+<td><img src="./tests/assign/ref/1.png" alt="assign"></td>
+</tr>
+<tr>
+<td><code>Return</code></td>
+<td><code>Return(value)</code>
+<td>
 
-#### `Return` (stmt)
+```typst
+Return[$x$]
+```
 
-Defined as `Return(arg: content)`.
+</td>
+<td><img src="./tests/return/ref/1.png" alt="return"></td>
+</tr>
+<tr>
+<td><code>Terminate</code></td>
+<td><code>Terminate(value)</code>
+<td>
 
-Generates `return #arg`.
+```typst
+Terminate[$x$]
+```
 
-#### `State` (stmt)
+</td>
+<td><img src="./tests/terminate/ref/1.png" alt="terminate"></td>
+</tr>
+<tr>
+<td><code>Break</code></td>
+<td><code>Break()</code>
+<td>
 
-Defined as `State(body: content)`.
+```typst
+Break()
+```
 
-Turns any content into a line.
+</td>
+<td><img src="./tests/break/ref/1.png" alt="break"></td>
+</tr>
+
+Users can also define their own commands using both `Call(..args)` and
+`Fn(..args)` and their inline versions `CallInline` and `FnInline`.
+
+```typst
+#import "../../algorithmic.typ"
+#import algorithmic: algorithm
+#set page(margin: .1cm, width: 4cm, height: auto)
+#algorithm({
+  import algorithmic: *
+  let Solve = Call.with("Solve")
+  let mean = Fn.with("mean")
+  Assign($x$, Solve[$A$, $b$])
+  Assign($y$, mean[$x$])
+})
+```
+![image of a custom call "Solve" given parameters "A" and "b" and a custom function "mean" given parameter "x" in the algorithmic environment. The call "Solve" is rendered in smallcaps and the function "mean" is rendered in a strong emphasis.](./docs/assets/custom-call-function.png)
+
+#### Comments
+
+There are three kinds of comments: `Comment`, `CommentInline`, and `LineComment`.
+
+1. `Comment` is a block comment that takes up a whole line.
+2. `CommentInline` is an inline comment that returns content on the same line.
+3. `LineComment` places a comment on the same line as a line of code to the right.
+
+<table>
+<thead>
+<tr>
+<th>Comment</th>
+<th>Description</th>
+<th>Usage</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Comment</code></td>
+<td><code>Comment(content)</code></td>
+<td>
+
+```typst
+Comment[This is a comment]
+```
+
+</td>
+<td><img src="./tests/comment/ref/1.png" alt="comment"></td>
+</tr>
+<tr>
+<td><code>CommentInline</code></td>
+<td><code>CommentInline(content)</code></td>
+<td>
+
+```typst
+CommentInline[This is a comment]
+```
+
+</td>
+<td><img src="./tests/commentinline/ref/1.png" alt="commentinline"></td>
+</tr>
+<tr>
+<td><code>LineComment</code></td>
+<td><code>LineComment(line, comment)</code></td>
+<td>
+
+```typst
+LineComment(Assign[a][1], [Initialize $a$ to 1])
+```
+
+</td>
+<td><img src="./tests/linecomment/ref/1.png" alt="linecomment"></td>
+</tr>
+</tbody>
+</table>

@@ -2,7 +2,7 @@ version := "0.1.0"
 typst := "typst"
 
 docs:
-    {{typst}} compile docs/algorithmic-demo.typ --root .
+    find docs/*.typ -type f | xargs -I {} fish -c 'echo ------ Compiling $argv[1] && time {{typst}} compile --root . $argv[1] docs/assets/$(basename $argv[1] .typ).png' {}
 
 version:
     {{typst}} --version
