@@ -11,3 +11,6 @@ categories = ["components", "visualization"]
 disciplines = ["computer-science", "mathematics"]
 compiler = "0.13.0"
 exclude = ["docs", "tests", "tbump.toml", ".gitignore", ".git"]
+
+[tool.tytanic]
+default.ppi = 1200
