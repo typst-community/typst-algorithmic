@@ -2,7 +2,7 @@
 name = "algorithmic"
 version = "1.0.0"
 entrypoint = "algorithmic.typ"
-authors = ["Jade Lovelace <@lf->", "Pascal Quach <@quachpas>"]
+authors = ["Jade Lovelace <https://github.com/lf->", "Pascal Quach <@quachpas>"]
 license = "MIT"
 description = "Algorithm pseudocode typesetting for Typst, inspired by algorithmicx in LaTeX"
 repository = "https://github.com/typst-community/typst-algorithmic"
@@ -23,7 +23,7 @@ exclude = [
   ".gtm",
   ".vscode",
   ".reuse",
-  "package.sh"
+  "package.sh",
 ]
 
 [tool.tytanic]
