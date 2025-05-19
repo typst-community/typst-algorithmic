@@ -20,9 +20,9 @@ Example:
 
 ```typst
 #import "@preview/algorithmic:1.0.0"
-#import algorithmic: algorithm
-
-#algorithm({
+#import algorithmic: style-algorithm, algorithm-figure
+#show: style-algorithm
+#algorithm-figure({
   import algorithmic: *
   Procedure(
     "Binary-Search",
