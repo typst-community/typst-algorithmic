@@ -13,7 +13,7 @@
   if type(ast) == array {
     ast.map(d => ast_to_content_list(indent, d))
   } else if type(ast) == content {
-    (pad(left: indent * 0.5em, ast),)
+    (line_content: ast, line_indent: indent)
   } else if type(ast) == dictionary {
     let new_indent = ast.at("change_indent", default: 0) + indent
     ast_to_content_list(new_indent, ast.body)
@@ -35,25 +35,32 @@
   }
   it
 }
-#let algorithm(inset: 0.2em, ..bits) = {
+#let algorithm(inset: 0.2em, v_stroke: 0pt + luma(200), ..bits) = {
   let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
   let table_bits = ()
   let lineno = 1
 
+  let indent_list = content.map(c => c.line_indent)
+  let max_indent = indent_list.sorted().last()
+  let colspans = indent_list.map(i => max_indent + 1 - i)
+  let indent_content = indent_list.map(i => ([], table.vline(stroke: v_stroke), []) * int(i / 2))
+  let columns = (18pt, ..(0.5em,) * max_indent, 100%)
+
   while lineno <= content.len() {
     table_bits.push([#lineno:])
-    table_bits.push(content.at(lineno - 1))
+    table_bits = table_bits + indent_content.at(lineno - 1)
+    table_bits.push(table.cell(content.at(lineno - 1).line_content, colspan: colspans.at(lineno - 1)))
     lineno = lineno + 1
   }
   return table(
-    columns: (18pt, 100%),
+    columns: columns,
     // line spacing
     inset: inset,
     stroke: none,
     ..table_bits
   )
 }
-#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, ..bits) = {
+#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, v_stroke: 0pt + luma(200), ..bits) = {
   return figure(
     supplement: supplement,
     kind: "algorithm",
