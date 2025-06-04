@@ -22,8 +22,20 @@
   }))
 })
 #let l(kw) = context {
-  let kws = locale.at(text.lang, default: locale.at("en"))
-  kws.at(kw, default: kw)
+  let lang = text.lang
+
+  if type(kw) == str {
+    let kws = locale.at(lang, default: locale.at("en"))
+    kws.at(kw, default: kw)
+  } else if type(kw) == dictionary {
+    kw.at(lang, default:
+      kw.at("en", default:
+        kw.values().at(0, default:
+          none
+        )
+      )
+    )
+  }
 }
 
 #let ast_to_content_list(indent, ast) = {
@@ -109,9 +121,9 @@
 }
 #let call(name, kw: "function", inline: false, style: smallcaps, args, ..body) = (
   if inline {
-    [#style(name)\(#arraify(args).join(", ")\)]
+    [#style(l(name))\(#arraify(args).join(", ")\)]
   } else {
-    iflike_block(kw1: kw, kw3: "end", (style(name) + $(#arraify(args).join(", "))$), ..body)
+    iflike_block(kw1: kw, kw3: "end", (style(l(name)) + $(#arraify(args).join(", "))$), ..body)
   }
 )
 
