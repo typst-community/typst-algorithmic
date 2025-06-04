@@ -9,6 +9,23 @@
  * (change_indent: int, body: ((ast | content)[] | content | ast)
  */
 
+#let locale = csv("locale.csv").fold((:), (result, row) => {
+  result + (row.at(0): row.slice(1))
+})
+#let locale = locale.pairs().fold((:), (result, (key, value)) => {
+  result+({key}: value.enumerate().fold((:), (result, (i, it)) => {
+    if it.len() != 0 {
+      result + (locale.at("en").at(i): it)
+    } else {
+      result
+    }
+  }))
+})
+#let l(kw) = context {
+  let kws = locale.at(text.lang, default: locale.at("en"))
+  kws.at(kw, default: kw)
+}
+
 #let ast_to_content_list(indent, ast) = {
   if type(ast) == array {
     ast.map(d => ast_to_content_list(indent, d))
@@ -63,17 +80,17 @@
   )
 }
 #let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
-  (strong(kw1) + " " + cond + " " + strong(kw2)),
+  (strong(l(kw1)) + " " + cond + " " + strong(l(kw2))),
   (change_indent: 2, body: body.pos()),
-  strong(kw3),
+  strong(l(kw3)),
 )
 #let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", cond, ..body) = (
-  (strong(kw1) + " " + cond + " " + strong(kw2)),
+  (strong(l(kw1)) + " " + cond + " " + strong(l(kw2))),
   (change_indent: 2, body: body.pos()),
-  strong(kw3),
+  strong(l(kw3)),
 )
 #let iflike_block_without_kw3(kw1: "", kw2: "", cond, ..body) = (
-  (strong(kw1) + " " + cond + " " + strong(kw2)),
+  (strong(l(kw1)) + " " + cond + " " + strong(l(kw2))),
   (change_indent: 2, body: body.pos()),
 )
 #let iflike_block(kw1: "", kw2: "", kw3: none, cond, ..body) = (
@@ -157,6 +174,6 @@
 
 // Instructions
 #let Assign(var, val) = (var + " " + $<-$ + " " + val,)
-#let Return(arg) = (strong("return") + " " + arg,)
-#let Terminate = (smallcaps("terminate"),)
-#let Break = (smallcaps("break"),)
+#let Return(arg) = (strong(l("return")) + " " + arg,)
+#let Terminate = (smallcaps(l("terminate")),)
+#let Break = (smallcaps(l("break")),)
