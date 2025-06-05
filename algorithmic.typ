@@ -9,19 +9,9 @@
  * (change_indent: int, body: ((ast | content)[] | content | ast)
  */
 
-#let locale = csv("locale.csv").fold((:), (result, row) => {
-  result + (row.at(0): row.slice(1))
-})
-#let locale = locale.pairs().fold((:), (result, (key, value)) => {
-  result+({key}: value.enumerate().fold((:), (result, (i, it)) => {
-    if it.len() != 0 {
-      result + (locale.at("en").at(i): it)
-    } else {
-      result
-    }
-  }))
-})
-#let l(kw) = context {
+#import "locale.typ": locale
+
+#let localize(kw) = context {
   let lang = text.lang
 
   if type(kw) == str {
@@ -94,17 +84,17 @@
   )
 }
 #let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
-  (strong(l(kw1)) + " " + cond + " " + strong(l(kw2))),
+  (strong(localize(kw1)) + " " + cond + " " + strong(localize(kw2))),
   (change_indent: 2, body: body.pos()),
-  strong(l(kw3)),
+  strong(localize(kw3)),
 )
 #let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", cond, ..body) = (
-  (strong(l(kw1)) + " " + cond + " " + strong(l(kw2))),
+  (strong(localize(kw1)) + " " + cond + " " + strong(localize(kw2))),
   (change_indent: 2, body: body.pos()),
-  strong(l(kw3)),
+  strong(localize(kw3)),
 )
 #let iflike_block_without_kw3(kw1: "", kw2: "", cond, ..body) = (
-  (strong(l(kw1)) + " " + cond + " " + strong(l(kw2))),
+  (strong(localize(kw1)) + " " + cond + " " + strong(localize(kw2))),
   (change_indent: 2, body: body.pos()),
 )
 #let iflike_block(kw1: "", kw2: "", kw3: none, cond, ..body) = (
@@ -123,9 +113,9 @@
 }
 #let call(name, kw: "function", inline: false, style: smallcaps, args, ..body) = (
   if inline {
-    [#style(l(name))\(#arraify(args).join(", ")\)]
+    [#style(localize(name))\(#arraify(args).join(", ")\)]
   } else {
-    iflike_block(kw1: kw, kw3: "end", (style(l(name)) + $(#arraify(args).join(", "))$), ..body)
+    iflike_block(kw1: kw, kw3: "end", (style(localize(name)) + $(#arraify(args).join(", "))$), ..body)
   }
 )
 
@@ -188,6 +178,6 @@
 
 // Instructions
 #let Assign(var, val) = (var + " " + $<-$ + " " + val,)
-#let Return(arg) = (strong(l("return")) + " " + arg,)
-#let Terminate = (smallcaps(l("terminate")),)
-#let Break = (smallcaps(l("break")),)
+#let Return(arg) = (strong(localize("return")) + " " + arg,)
+#let Terminate = (smallcaps(localize("terminate")),)
+#let Break = (smallcaps(localize("break")),)
