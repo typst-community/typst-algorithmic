@@ -11,11 +11,15 @@
 
 #import "locale.typ": locale
 
-#let localize(kw) = context {
-  let lang = text.lang
+#let localize(kw, lang: none) = context {
+  let lang = if lang != none {
+    lang
+  } else {
+    text.lang
+  }
 
   if type(kw) == str {
-    let kws = locale.at(lang, default: locale.at("en"))
+    let kws = locale.at(lang, default: (:))
     kws.at(kw, default: kw)
   } else if type(kw) == dictionary {
     kw.at(lang, default:
@@ -74,34 +78,38 @@
     ..table_bits
   )
 }
-#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, ..bits) = {
+#let algorithm-figure(title, supplement: none, inset: 0.2em, lang: none, ..bits) = {
   return figure(
-    supplement: supplement,
+    supplement: if supplement != none {
+      supplement
+    } else {
+      localize("Algorithm", lang: lang)
+    },
     kind: "algorithm",
     caption: title,
     placement: none,
     algorithm(inset: inset, ..bits),
   )
 }
-#let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
-  (strong(localize(kw1)) + " " + cond + " " + strong(localize(kw2))),
+#let iflike_block(kw1: "", kw2: "", kw3: "", lang: none, cond, ..body) = (
+  (strong(localize(kw1, lang: lang)) + " " + cond + " " + strong(localize(kw2, lang: lang))),
   (change_indent: 2, body: body.pos()),
-  strong(localize(kw3)),
+  strong(localize(kw3, lang: lang)),
 )
-#let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", cond, ..body) = (
-  (strong(localize(kw1)) + " " + cond + " " + strong(localize(kw2))),
+#let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", lang: none, cond, ..body) = (
+  (strong(localize(kw1, lang: lang)) + " " + cond + " " + strong(localize(kw2, lang: lang))),
   (change_indent: 2, body: body.pos()),
-  strong(localize(kw3)),
+  strong(localize(kw3, lang: lang)),
 )
-#let iflike_block_without_kw3(kw1: "", kw2: "", cond, ..body) = (
-  (strong(localize(kw1)) + " " + cond + " " + strong(localize(kw2))),
+#let iflike_block_without_kw3(kw1: "", kw2: "", lang: none, cond, ..body) = (
+  (strong(localize(kw1, lang: lang)) + " " + cond + " " + strong(localize(kw2, lang: lang))),
   (change_indent: 2, body: body.pos()),
 )
-#let iflike_block(kw1: "", kw2: "", kw3: none, cond, ..body) = (
+#let iflike_block(kw1: "", kw2: "", kw3: none, lang: none, cond, ..body) = (
   if kw3 == "" or kw3 == none {
-    iflike_block_without_kw3(kw1: kw1, kw2: kw2, cond, ..body)
+    iflike_block_without_kw3(kw1: kw1, kw2: kw2, lang: lang, cond, ..body)
   } else {
-    iflike_block_with_kw3(kw1: kw1, kw2: kw2, kw3: kw3, cond, ..body)
+    iflike_block_with_kw3(kw1: kw1, kw2: kw2, kw3: kw3, lang: lang, cond, ..body)
   }
 )
 #let arraify(v) = {
@@ -111,11 +119,11 @@
     (v,)
   }
 }
-#let call(name, kw: "function", inline: false, style: smallcaps, args, ..body) = (
+#let call(name, kw: "function", inline: false, style: smallcaps, lang: none, args, ..body) = (
   if inline {
-    [#style(localize(name))\(#arraify(args).join(", ")\)]
+    [#style(localize(name, lang: lang))\(#arraify(args).join(", ")\)]
   } else {
-    iflike_block(kw1: kw, kw3: "end", (style(localize(name)) + $(#arraify(args).join(", "))$), ..body)
+    iflike_block(kw1: kw, kw3: "end", (style(localize(name, lang: lang)) + $(#arraify(args).join(", "))$), lang: lang, ..body)
   }
 )
 
@@ -128,13 +136,13 @@
 #let LineBreak = State[]
 
 /// Inline call
-#let CallInline(name, args) = call(inline: true, name, args)
-#let FnInline(f, args) = call(inline: true, style: strong, f, args)
+#let CallInline(name, args, lang: none) = call(inline: true, name, args, lang: lang)
+#let FnInline(f, args, lang: none) = call(inline: true, style: strong, f, args, lang: lang)
 #let CommentInline(c) = sym.triangle.stroked.r + " " + c
 
 // Block calls
-#let Call(..args) = (CallInline(..args),)
-#let Fn(..args) = (FnInline(..args),)
+#let Call(lang: none, ..args) = (CallInline(..args, lang: lang),)
+#let Fn(lang: none, ..args) = (FnInline(..args, lang: lang),)
 #let Comment(c) = (CommentInline(c),)
 #let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)],)
 
@@ -144,7 +152,7 @@
 #let For = iflike_block.with(kw1: "for", kw2: "do", kw3: "end")
 #let Else = iflike_block.with(kw1: "else", kw2: "", kw3: "end", "")
 #let ElseIf = iflike_block.with(kw1: "else if", kw2: "then", kw3: "end")
-#let IfElseChain(..conditions_and_bodies) = {
+#let IfElseChain(lang: none, ..conditions_and_bodies) = {
   let result = ()
   let conditions_and_bodies = conditions_and_bodies.pos()
   let len = conditions_and_bodies.len()
@@ -153,20 +161,20 @@
   while i < len {
     if i == len - 1 and calc.odd(len) {
       // Last element is the "else" block
-      result.push(Else(..arraify(conditions_and_bodies.at(i))))
+      result.push(Else(..arraify(conditions_and_bodies.at(i)), lang: lang))
     } else if calc.even(i) {
       // Condition
       let cond = conditions_and_bodies.at(i)
       let body = arraify(conditions_and_bodies.at(i + 1))
       if i == 0 {
         // First condition is a regular "if"
-        result.push(If(cond, ..body, kw3: ""))
+        result.push(If(cond, ..body, kw3: "", lang: lang))
       } else if i + 2 == len {
         // Last condition before "else" is an "elseif" with "end"
-        result.push(ElseIf(cond, ..body, kw3: "end"))
+        result.push(ElseIf(cond, ..body, kw3: "end", lang: lang))
       } else {
         // Intermediate conditions are "elseif" without "end"
-        result.push(ElseIf(cond, ..body, kw3: ""))
+        result.push(ElseIf(cond, ..body, kw3: "", lang: lang))
       }
     } else {
       // Skip body since it's already processed
@@ -178,6 +186,6 @@
 
 // Instructions
 #let Assign(var, val) = (var + " " + $<-$ + " " + val,)
-#let Return(arg) = (strong(localize("return")) + " " + arg,)
-#let Terminate = (smallcaps(localize("terminate")),)
-#let Break = (smallcaps(localize("break")),)
+#let Return(arg, lang: none) = (strong(localize("return", lang: lang)) + " " + arg,)
+#let Terminate(lang: none) = (smallcaps(localize("terminate", lang: lang)),)
+#let Break(lang: none) = (smallcaps(localize("break", lang: lang)),)

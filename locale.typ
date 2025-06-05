@@ -1,5 +1,6 @@
 #let locale = (
   en: (
+    "Algorithm": "Algorithm",
     "function": "function",
     "procedure": "procedure",
     "if": "if",
@@ -15,6 +16,7 @@
     "break": "break",
   ),
   de: (
+    "Algorithm": "Algorithmus",
     "function": "Funktion",
     "procedure": "Prozedur",
     "if": "wenn",
@@ -30,6 +32,7 @@
     // "break": "break", usually not translated
   ),
   hr: (
+    "Algorithm": "Algoritam",
     "function": "funkcija",
     "procedure": "procedura",
     "if": "ako",
@@ -45,6 +48,7 @@
     "break": "prekid",
   ),
   sr: (
+    "Algorithm": "Algoritam",
     "function": "funkcija",
     "procedure": "procedura",
     "if": "ako",
@@ -60,6 +64,7 @@
     "break": "prekid",
   ),
   cnr: (
+    "Algorithm": "Algoritam",
     "function": "funkcija",
     "procedure": "procedura",
     "if": "ako",
@@ -75,6 +80,7 @@
     "break": "prekid",
   ),
   bs: (
+    "Algorithm": "Algoritam",
     "function": "funkcija",
     "procedure": "procedura",
     "if": "ako",
@@ -90,6 +96,7 @@
     "break": "prekid",
   ),
   sl: (
+    "Algorithm": "Algoritem",
     "function": "funkcija",
     "procedure": "procedura",
     "if": "če",
