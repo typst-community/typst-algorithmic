@@ -1,3 +1,6 @@
 [ver:1,total:240]
 .github/workflows/test.yml:210,1749276000:210,m
 .gtm/terminal.app:30,1749276000:30,r
+
+[ver:1,total:120]
+.gtm/terminal.app:120,1749276000:120,r
