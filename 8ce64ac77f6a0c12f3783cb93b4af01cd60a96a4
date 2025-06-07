@@ -1,0 +1,8 @@
+[ver:1,total:1020]
+.gtm/terminal.app:310,1748707200:180,1749276000:130,r
+typst.toml:220,1747677600:180,1749276000:40,r
+.github/workflows/test.yml:184,1749276000:184,m
+tests/break/test.typ:150,1749276000:150,r
+justfile:122,1749276000:122,m
+algorithmic.typ:24,1749276000:24,r
+tests/if/test.typ:10,1749276000:10,r
