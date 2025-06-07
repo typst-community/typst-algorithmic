@@ -9,3 +9,6 @@ version:
 
 test:
     tt run # https://github.com/tingerrr/tytanic
+
+test-update:
+    tt update
