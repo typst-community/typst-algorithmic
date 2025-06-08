@@ -37,6 +37,9 @@
 }
 #let algorithm(inset: 0.2em, v_stroke: 0pt + luma(200), ..bits) = {
   let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
+  if content.len() == 0 or content == (none,) {
+    return none
+  }
   let table_bits = ()
   let lineno = 1
 
