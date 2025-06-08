@@ -19,18 +19,23 @@
     ast_to_content_list(new_indent, ast.body)
   }
 }
-#let style-algorithm = it => {
+#let style-algorithm(
+  it,
+  caption-style: strong,
+  caption-align: start,
+  breakable: true,
+  hlines: (table.hline(), table.hline(), table.hline()),
+) = {
   show figure.where(kind: "algorithm"): it => {
-    set align(left)
-    set block(breakable: true)
+    set block(breakable: breakable)
     table(
       columns: 1,
       stroke: none,
-      table.hline(),
-      strong(it.caption),
-      table.hline(),
-      it.body,
-      table.hline(),
+      hlines.at(0),
+      caption-style(align(caption-align, it.caption)),
+      hlines.at(1),
+      align(start, it.body),
+      hlines.at(2),
     )
   }
   it
