@@ -118,6 +118,26 @@ with the `style-algorithm` show rule.
 })
 ```
 
+`style-algorithm` provides several options to customize the appearance of the algorithm figure:
+
+- `caption-style (function): strong` is applied to the algorithm's title
+- `caption-align (alignment): start` aligns the title to the start (left for LTR, and right for RTL languages) by default
+- `breakable (bool): true` controls whether or not the figure will break across pages.
+- `hlines (array of 3 content): (table.hline(), table.hline(), table.hline())` provides horizontal lines at the top, middle, and bottom of the algorithm figure.
+
+An example of how to style the algorithm figure:
+
+```typst
+#show: style-algorithm.with(
+  breakable: false,
+  caption-align: end,
+  caption-style: emph,
+  hlines: (table.hline(stroke: 2pt + red), table.hline(stroke: 2pt + blue), table.hline(stroke: 2pt + green)),
+)
+```
+which will result in something like
+![image of the binary search algorithm with a right-aligned and italics figure caption enclosed within a red and blue 2pt table horizontal lines. The algorithm is finally ended with a green 2pt horizontal line](tests/style-2/ref/1.png).
+
 #### Control flow
 
 Algorithmic provides basic control flow statements: `If`, `While`, `For`,
