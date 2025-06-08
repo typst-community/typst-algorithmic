@@ -20,9 +20,9 @@
   }
 }
 #let style-algorithm = it => {
-  show figure: set block(breakable: true)
   show figure.where(kind: "algorithm"): it => {
     set align(left)
+    set block(breakable: true)
     table(
       columns: 1,
       stroke: none,
