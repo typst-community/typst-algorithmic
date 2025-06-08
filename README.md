@@ -22,7 +22,7 @@ Example:
 #import "@preview/algorithmic:1.0.0"
 #import algorithmic: style-algorithm, algorithm-figure
 #show: style-algorithm
-#algorithm-figure("Binary Search",{
+#algorithm-figure("Binary Search", {
   import algorithmic: *
   Procedure(
     "Binary-Search",
@@ -112,7 +112,7 @@ with the `style-algorithm` show rule.
 ```typst
 #import algorithmic: algorithm-figure, style-algorithm
 #show: style-algorithm // Do not forget!
-#algorithm-figure("Variable Assignment",{
+#algorithm-figure("Variable Assignment", {
   import algorithmic: *
   Assign[$x$][$y$]
 })
