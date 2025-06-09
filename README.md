@@ -120,7 +120,7 @@ with the `style-algorithm` show rule.
 
 `style-algorithm` provides several options to customize the appearance of the algorithm figure:
 
-- `caption-style (function): strong` is applied to the algorithm's title
+- `caption-style (function): strong` is applied to the algorithm's title. Normal text can be used with `caption-style: text`, or `caption-style: c => c`.
 - `caption-align (alignment): start` aligns the title to the start (left for LTR, and right for RTL languages) by default
 - `breakable (bool): true` controls whether or not the figure will break across pages.
 - `hlines (array of 3 content): (table.hline(), table.hline(), table.hline())` provides horizontal lines at the top, middle, and bottom of the algorithm figure.
