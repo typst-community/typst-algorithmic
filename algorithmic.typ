@@ -6,19 +6,23 @@
 
 /*
  * Generated AST:
- * (change_indent: int, body: ((ast | content)[] | content | ast)
+ * (change-indent: int, body: ((ast | content)[] | content | ast)
  */
 
-#let ast_to_content_list(indent, ast) = {
+#let ast-to-content-list(indent, ast) = {
   if type(ast) == array {
-    ast.map(d => ast_to_content_list(indent, d))
+    // array of (ast | content)
+    ast.map(d => ast-to-content-list(indent, d))
   } else if type(ast) == content {
-    (line_content: ast, line_indent: indent)
+    // (line-content: ast, line-indent: int)
+    (line-content: ast, line-indent: indent)
   } else if type(ast) == dictionary {
-    let new_indent = ast.at("change_indent", default: 0) + indent
-    ast_to_content_list(new_indent, ast.body)
+    // (change-indent: int, body: ((ast | content)[] | content | ast))
+    let new-indent = ast.at("change-indent", default: 0) + indent
+    ast-to-content-list(new-indent, ast.body)
   }
 }
+
 #let style-algorithm(
   it,
   caption-style: strong,
@@ -40,62 +44,67 @@
   }
   it
 }
-#let algorithm(inset: 0.2em, v_stroke: 0pt + luma(200), ..bits) = {
-  let content = bits.pos().map(b => ast_to_content_list(0, b)).flatten()
+
+#let algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), ..bits) = {
+  let content = bits.pos().map(b => ast-to-content-list(0, b)).flatten()
   if content.len() == 0 or content == (none,) {
     return none
   }
-  let table_bits = ()
-  let lineno = 1
+  let table-bits = ()
+  let line-number = 1
 
-  let indent_list = content.map(c => c.line_indent)
-  let max_indent = indent_list.sorted().last()
-  let colspans = indent_list.map(i => max_indent + 1 - i)
-  let indent_content = indent_list.map(i => ([], table.vline(stroke: v_stroke), []) * int(i / 2))
-  let columns = (18pt, ..(0.5em,) * max_indent, 100%)
+  let indent-list = content.map(c => c.line-indent)
+  let max-indent = indent-list.sorted().last()
+  let colspans = indent-list.map(i => max-indent + 1 - i)
+  let indent-content = indent-list.map(i => ([], table.vline(stroke: vstroke), []) * int(i / 2))
+  let columns = (18pt, ..(indent,) * max-indent, 100%)
 
-  while lineno <= content.len() {
-    table_bits.push([#lineno:])
-    table_bits = table_bits + indent_content.at(lineno - 1)
-    table_bits.push(table.cell(content.at(lineno - 1).line_content, colspan: colspans.at(lineno - 1)))
-    lineno = lineno + 1
+  while line-number <= content.len() {
+    table-bits.push([#line-number:])
+    table-bits = table-bits + indent-content.at(line-number - 1)
+    table-bits.push(table.cell(content.at(line-number - 1).line-content, colspan: colspans.at(line-number - 1)))
+    line-number = line-number + 1
   }
   return table(
     columns: columns,
     // line spacing
     inset: inset,
     stroke: none,
-    ..table_bits
+    ..table-bits
   )
 }
-#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, v_stroke: 0pt + luma(200), ..bits) = {
+
+#let algorithm-figure(
+  title,
+  supplement: "Algorithm",
+  inset: 0.2em,
+  indent: 0.5em,
+  vstroke: 0pt + luma(200),
+  ..bits,
+) = {
   return figure(
     supplement: supplement,
     kind: "algorithm",
     caption: title,
     placement: none,
-    algorithm(inset: inset, ..bits),
+    algorithm(indent: indent, inset: inset, vstroke: vstroke, ..bits),
   )
 }
-#let iflike_block(kw1: "", kw2: "", kw3: "", cond, ..body) = (
+
+#let iflike-unterminated(kw1: "", kw2: "", cond, ..body) = (
   (strong(kw1) + " " + cond + " " + strong(kw2)),
-  (change_indent: 2, body: body.pos()),
+  (change-indent: 2, body: body.pos()),
+)
+#let iflike-terminated(kw1: "", kw2: "", kw3: "", cond, ..body) = (
+  (strong(kw1) + " " + cond + " " + strong(kw2)),
+  (change-indent: 2, body: body.pos()),
   strong(kw3),
 )
-#let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", cond, ..body) = (
-  (strong(kw1) + " " + cond + " " + strong(kw2)),
-  (change_indent: 2, body: body.pos()),
-  strong(kw3),
-)
-#let iflike_block_without_kw3(kw1: "", kw2: "", cond, ..body) = (
-  (strong(kw1) + " " + cond + " " + strong(kw2)),
-  (change_indent: 2, body: body.pos()),
-)
-#let iflike_block(kw1: "", kw2: "", kw3: none, cond, ..body) = (
+#let iflike(kw1: "", kw2: "", kw3: none, cond, ..body) = (
   if kw3 == "" or kw3 == none {
-    iflike_block_without_kw3(kw1: kw1, kw2: kw2, cond, ..body)
+    iflike-unterminated(kw1: kw1, kw2: kw2, cond, ..body)
   } else {
-    iflike_block_with_kw3(kw1: kw1, kw2: kw2, kw3: kw3, cond, ..body)
+    iflike-terminated(kw1: kw1, kw2: kw2, kw3: kw3, cond, ..body)
   }
 )
 #let arraify(v) = {
@@ -109,7 +118,7 @@
   if inline {
     [#style(name)\(#arraify(args).join(", ")\)]
   } else {
-    iflike_block(kw1: kw, kw3: "end", (style(name) + $(#arraify(args).join(", "))$), ..body)
+    iflike(kw1: kw, kw3: "end", (style(name) + $(#arraify(args).join(", "))$), ..body)
   }
 )
 
@@ -133,25 +142,25 @@
 #let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)],)
 
 // Control flow
-#let If = iflike_block.with(kw1: "if", kw2: "then", kw3: "end")
-#let While = iflike_block.with(kw1: "while", kw2: "do", kw3: "end")
-#let For = iflike_block.with(kw1: "for", kw2: "do", kw3: "end")
-#let Else = iflike_block.with(kw1: "else", kw2: "", kw3: "end", "")
-#let ElseIf = iflike_block.with(kw1: "else if", kw2: "then", kw3: "end")
-#let IfElseChain(..conditions_and_bodies) = {
+#let If = iflike.with(kw1: "if", kw2: "then", kw3: "end")
+#let While = iflike.with(kw1: "while", kw2: "do", kw3: "end")
+#let For = iflike.with(kw1: "for", kw2: "do", kw3: "end")
+#let Else = iflike.with(kw1: "else", kw2: "", kw3: "end", "")
+#let ElseIf = iflike.with(kw1: "else if", kw2: "then", kw3: "end")
+#let IfElseChain(..conditions-and-bodies) = {
   let result = ()
-  let conditions_and_bodies = conditions_and_bodies.pos()
-  let len = conditions_and_bodies.len()
+  let conditions-and-bodies = conditions-and-bodies.pos()
+  let len = conditions-and-bodies.len()
   let i = 0
 
   while i < len {
     if i == len - 1 and calc.odd(len) {
       // Last element is the "else" block
-      result.push(Else(..arraify(conditions_and_bodies.at(i))))
+      result.push(Else(..arraify(conditions-and-bodies.at(i))))
     } else if calc.even(i) {
       // Condition
-      let cond = conditions_and_bodies.at(i)
-      let body = arraify(conditions_and_bodies.at(i + 1))
+      let cond = conditions-and-bodies.at(i)
+      let body = arraify(conditions-and-bodies.at(i + 1))
       if i == 0 {
         // First condition is a regular "if"
         result.push(If(cond, ..body, kw3: ""))

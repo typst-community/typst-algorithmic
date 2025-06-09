@@ -22,37 +22,41 @@ Example:
 #import "@preview/algorithmic:1.0.0"
 #import algorithmic: style-algorithm, algorithm-figure
 #show: style-algorithm
-#algorithm-figure("Binary Search", {
-  import algorithmic: *
-  Procedure(
-    "Binary-Search",
-    ("A", "n", "v"),
-    {
-      Comment[Initialize the search range]
-      Assign[$l$][$1$]
-      Assign[$r$][$n$]
-      LineBreak
-      While(
-        $l <= r$,
-        {
-          Assign([mid], FnInline[floor][$(l + r) / 2$])
-          IfElseChain(
-            $A ["mid"] < v$,
-            {
-              Assign[$l$][$m + 1$]
-            },
-            [$A ["mid"] > v$],
-            {
-              Assign[$r$][$m - 1$]
-            },
-            Return[$m$],
-          )
-        },
-      )
-      Return[*null*]
-    },
-  )
-})
+#algorithm-figure(
+  "Binary Search",
+  vstroke: .5pt + luma(200),
+  {
+    import algorithmic: *
+    Procedure(
+      "Binary-Search",
+      ("A", "n", "v"),
+      {
+        Comment[Initialize the search range]
+        Assign[$l$][$1$]
+        Assign[$r$][$n$]
+        LineBreak
+        While(
+          $l <= r$,
+          {
+            Assign([mid], FnInline[floor][$(l + r) / 2$])
+            IfElseChain(
+              $A ["mid"] < v$,
+              {
+                Assign[$l$][$m + 1$]
+              },
+              [$A ["mid"] > v$],
+              {
+                Assign[$r$][$m - 1$]
+              },
+              Return[$m$],
+            )
+          },
+        )
+        Return[*null*]
+      },
+    )
+  }
+)
 ```
 
 This DSL is implemented using the same trick as [CeTZ] uses: a code block of
@@ -64,7 +68,7 @@ arrays gets those arrays joined together.
 
 ### Documentation
 
-#### `algorithm(inset: 0.2em, ..bits)`
+#### `algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), ..bits)`
 
 This is the main function of the package. It takes a list of arrays and
 returns a typesetting of the algorithm. You can modify the inset
@@ -73,6 +77,7 @@ between lines with the `inset` parameter.
 ```typst
 #algorithm(
   inset: 1em, // more spacing between lines
+  indent: 0.5em, // indentation for the algorithm
   { // provide an array
     import algorithmic: * // import all names in the array
     Assign[$x$][$y$]
@@ -87,15 +92,16 @@ between lines with the `inset` parameter.
   }
 )
 ```
+![image of the algorithm with three lines of code assigning x to y, y to x, and z to x + y. The inset is set to 1em, the indent to 0.5em](tests/algorithm/ref/1.png)
 
-#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, ..bits)`
+#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), ..bits)`
 
 The `algorithm-figure` function is a wrapper around `algorithm` that returns a
 figure element of the algorithm. It takes the same parameters as
 `algorithm`, but also takes a `title` and a `supplement` parameter for the figure.
 
 ```typst
-#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, ..bits) = {
+#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), ..bits) = {
   return figure(
     supplement: supplement,
     kind: "algorithm", // the kind of figure
@@ -340,6 +346,8 @@ Break()
 </td>
 <td><img src="./tests/break/ref/1.png" alt="image of a break statement" width="500"></td>
 </tr>
+</tbody>
+</table>
 
 Users can also define their own commands using both `Call(..args)` and
 `Fn(..args)` and their inline versions `CallInline` and `FnInline`.
