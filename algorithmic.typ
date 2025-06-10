@@ -11,15 +11,9 @@
 
 #import "locale.typ": locale
 
-#let localize(kw, lang: none) = context {
-  let lang = if lang != none {
-    lang
-  } else {
-    text.lang
-  }
-
+#let localize(kw, lang: "en") = {
   if type(kw) == str {
-    let kws = locale.at(lang, default: (:))
+    let kws = locale.at(lang)
     kws.at(kw, default: kw)
   } else if type(kw) == dictionary {
     kw.at(lang, default:
@@ -78,12 +72,12 @@
     ..table_bits
   )
 }
-#let algorithm-figure(title, supplement: none, inset: 0.2em, lang: none, ..bits) = {
+#let algorithm-figure(title, supplement: none, inset: 0.2em, lang: "en", ..bits) = {
   return figure(
-    supplement: if supplement != none {
-      supplement
-    } else {
+    supplement: if supplement == none {
       localize("Algorithm", lang: lang)
+    } else {
+      supplement
     },
     kind: "algorithm",
     caption: title,
@@ -91,21 +85,21 @@
     algorithm(inset: inset, ..bits),
   )
 }
-#let iflike_block(kw1: "", kw2: "", kw3: "", lang: none, cond, ..body) = (
+#let iflike_block(kw1: "", kw2: "", kw3: "", lang: "en", cond, ..body) = (
   (strong(localize(kw1, lang: lang)) + " " + cond + " " + strong(localize(kw2, lang: lang))),
   (change_indent: 2, body: body.pos()),
   strong(localize(kw3, lang: lang)),
 )
-#let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", lang: none, cond, ..body) = (
+#let iflike_block_with_kw3(kw1: "", kw2: "", kw3: "", lang: "en", cond, ..body) = (
   (strong(localize(kw1, lang: lang)) + " " + cond + " " + strong(localize(kw2, lang: lang))),
   (change_indent: 2, body: body.pos()),
   strong(localize(kw3, lang: lang)),
 )
-#let iflike_block_without_kw3(kw1: "", kw2: "", lang: none, cond, ..body) = (
+#let iflike_block_without_kw3(kw1: "", kw2: "", lang: "en", cond, ..body) = (
   (strong(localize(kw1, lang: lang)) + " " + cond + " " + strong(localize(kw2, lang: lang))),
   (change_indent: 2, body: body.pos()),
 )
-#let iflike_block(kw1: "", kw2: "", kw3: none, lang: none, cond, ..body) = (
+#let iflike_block(kw1: "", kw2: "", kw3: none, lang: "en", cond, ..body) = (
   if kw3 == "" or kw3 == none {
     iflike_block_without_kw3(kw1: kw1, kw2: kw2, lang: lang, cond, ..body)
   } else {
@@ -119,7 +113,7 @@
     (v,)
   }
 }
-#let call(name, kw: "function", inline: false, style: smallcaps, lang: none, args, ..body) = (
+#let call(name, kw: "function", inline: false, style: smallcaps, lang: "en", args, ..body) = (
   if inline {
     [#style(localize(name, lang: lang))\(#arraify(args).join(", ")\)]
   } else {
@@ -186,6 +180,6 @@
 
 // Instructions
 #let Assign(var, val) = (var + " " + $<-$ + " " + val,)
-#let Return(arg, lang: none) = (strong(localize("return", lang: lang)) + " " + arg,)
-#let Terminate(lang: none) = (smallcaps(localize("terminate", lang: lang)),)
-#let Break(lang: none) = (smallcaps(localize("break", lang: lang)),)
+#let Return(arg, lang: "en") = (strong(localize("return", lang: lang)) + " " + arg,)
+#let Terminate(lang: "en") = (smallcaps(localize("terminate", lang: lang)),)
+#let Break(lang: "en") = (smallcaps(localize("break", lang: lang)),)
