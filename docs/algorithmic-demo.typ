@@ -9,6 +9,7 @@
 #show: style-algorithm
 #algorithm-figure(
   "Binary Search",
+  vstroke: .5pt + luma(200),
   {
     import algorithmic: *
     Procedure(
