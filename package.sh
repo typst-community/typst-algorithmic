@@ -6,7 +6,7 @@ tar_args=$(while IFS= read -r line; do echo " --exclude=$line"; done <<<"$exclud
 version=$(awk '/version =/ {print $3}' typst.toml | sed 's/"//g')
 tar_args+=" --exclude-vcs-ignores -czf ../algorithmic-$version.tar.gz ."
 tar $tar_args
-tar -tf ~/algorithmic-$version.tar.gz
+tar -tf $HOME/algorithmic-$version.tar.gz
 cd $HOME
 rm -rf $HOME/packages
 git clone --depth 1 --no-checkout --filter="tree:0" git@github.com:typst/packages
@@ -15,7 +15,7 @@ git sparse-checkout init
 git sparse-checkout set packages/preview/algorithmic
 git checkout main
 mkdir packages/preview/algorithmic/$version
-tar -xvf ~/algorithmic-$version.tar.gz -C packages/preview/algorithmic/$version
+tar -xvf $HOME/algorithmic-$version.tar.gz -C packages/preview/algorithmic/$version
 git add packages
 git commit
 gh repo fork
