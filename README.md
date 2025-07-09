@@ -19,7 +19,7 @@ indentation, bolded keywords, and such](./docs/assets/algorithmic-demo.png)
 Example:
 
 ```typst
-#import "@preview/algorithmic:1.0.0"
+#import "@preview/algorithmic:1.0.1"
 #import algorithmic: style-algorithm, algorithm-figure
 #show: style-algorithm
 #algorithm-figure(
