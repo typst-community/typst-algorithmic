@@ -1,2 +1,8 @@
 [ver:1,total:60]
 .gtm/terminal.app:60,1752652800:60,r
+
+[ver:1,total:480]
+.gtm/terminal.app:168,1752652800:168,r
+README.md:150,1752652800:150,r
+package.sh:109,1752652800:109,m
+typst.toml:53,1752652800:53,r
