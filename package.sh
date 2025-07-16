@@ -7,6 +7,7 @@ version=$(awk '/version =/ {print $3}' typst.toml | sed 's/"//g')
 tar_args+=" --exclude-vcs-ignores -czf ../algorithmic-$version.tar.gz ."
 tar $tar_args
 tar -tf $HOME/algorithmic-$version.tar.gz
+read -p "Press enter to continue"
 cd $HOME
 rm -rf $HOME/packages
 git clone --depth 1 --no-checkout --filter="tree:0" git@github.com:typst/packages
