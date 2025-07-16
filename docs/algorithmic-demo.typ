@@ -23,7 +23,7 @@
         While(
           $l <= r$,
           {
-            Assign([mid], FnInline[floor][$(l + r) / 2$])
+            Assign([mid], FnInline((en: "floor", hr: "pod"))[$(l + r) / 2$])
             IfElseChain(
               $A ["mid"] < v$,
               {
