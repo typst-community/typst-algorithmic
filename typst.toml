@@ -11,11 +11,8 @@ categories = ["components", "visualization"]
 disciplines = ["computer-science", "mathematics"]
 compiler = "0.13.0"
 exclude = [
-  "docs/*.typ",
-  "docs/*.pdf",
-  "tests/**/out",
-  "tests/**/diff",
-  "tests/**/*.typ",
+  "docs/",
+  "tests/",
   "tbump.toml",
   "justfile",
   ".gitignore",
@@ -24,7 +21,7 @@ exclude = [
   ".vscode",
   ".reuse",
   "package.sh",
-  ".github/workflows"
+  ".github/workflows",
 ]
 
 [tool.tytanic]
