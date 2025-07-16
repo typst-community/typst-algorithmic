@@ -1,6 +1,6 @@
 [package]
 name = "algorithmic"
-version = "1.0.1"
+version = "1.0.2"
 entrypoint = "algorithmic.typ"
 authors = ["Jade Lovelace <https://github.com/lf->", "Pascal Quach <@quachpas>"]
 license = "MIT"
