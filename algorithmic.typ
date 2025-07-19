@@ -58,7 +58,8 @@
   let colspans = indent-list.map(i => max-indent + 1 - i)
   let indent-content = indent-list.map(i => ([], table.vline(stroke: vstroke), []) * int(i / 2))
   let indents = (indent,) * max-indent
-  let columns = (18pt, ..indents, 100% - 18pt - indents.sum())
+  let offset = 18pt + if indents.len() != 0 { indents.sum() }
+  let columns = (18pt, ..indents, 100% - offset)
 
   while line-number <= content.len() {
     table-bits.push([#line-number:])
