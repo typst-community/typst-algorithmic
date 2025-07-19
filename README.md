@@ -129,7 +129,7 @@ with the `style-algorithm` show rule.
 - `caption-style (function): strong` is applied to the algorithm's title. Normal text can be used with `caption-style: text`, or `caption-style: c => c`.
 - `caption-align (alignment): start` aligns the title to the start (left for LTR, and right for RTL languages) by default
 - `breakable (bool): true` controls whether or not the figure will break across pages.
-- `hlines (array of 3 content): (table.hline(), table.hline(), table.hline())` provides horizontal lines at the top, middle, and bottom of the algorithm figure.
+- `hlines (array of 3 content): (grid.hline(), grid.hline(), grid.hline())` provides horizontal lines at the top, middle, and bottom of the algorithm figure.
 
 An example of how to style the algorithm figure:
 
@@ -138,11 +138,11 @@ An example of how to style the algorithm figure:
   breakable: false,
   caption-align: end,
   caption-style: emph,
-  hlines: (table.hline(stroke: 2pt + red), table.hline(stroke: 2pt + blue), table.hline(stroke: 2pt + green)),
+  hlines: (grid.hline(stroke: 2pt + red), grid.hline(stroke: 2pt + blue), grid.hline(stroke: 2pt + green)),
 )
 ```
 which will result in something like
-![image of the binary search algorithm with a right-aligned and italics figure caption enclosed within a red and blue 2pt table horizontal lines. The algorithm is finally ended with a green 2pt horizontal line](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.2/tests/style-2/ref/1.png).
+![image of the binary search algorithm with a right-aligned and italics figure caption enclosed within a red and blue 2pt grid horizontal lines. The algorithm is finally ended with a green 2pt horizontal line](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.2/tests/style-2/ref/1.png).
 
 #### Control flow
 
@@ -150,7 +150,7 @@ Algorithmic provides basic control flow statements: `If`, `While`, `For`,
 `Else`, `ElseIf`, and a `IfElseChain` utility.
 
 <!-- Table -->
-<table>
+<grid>
 <thead>
 <tr>
 <th>Statement</th>
@@ -253,14 +253,14 @@ IfElseChain( // Alternating content and bits
 <td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.2/tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x" width="500"></td>
 </tr>
 </tbody>
-</table>
+</grid>
 
 #### Commands
 
 The package provides a few commands: `Function`, `Procedure`, `Assign`,
 `Return`, `Terminate` and `Break`.
 
-<table>
+<grid>
 <thead>
 <tr>
 <th>Command</th>
@@ -347,7 +347,7 @@ Break()
 <td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.2/tests/break/ref/1.png" alt="image of a break statement" width="500"></td>
 </tr>
 </tbody>
-</table>
+</grid>
 
 Users can also define their own commands using both `Call(..args)` and
 `Fn(..args)` and their inline versions `CallInline` and `FnInline`.
@@ -388,7 +388,7 @@ There are three kinds of comments: `Comment`, `CommentInline`, and `LineComment`
 2. `CommentInline` is an inline comment that returns content on the same line.
 3. `LineComment` places a comment on the same line as a line of code to the right.
 
-<table>
+<grid>
 <thead>
 <tr>
 <th>Comment</th>
@@ -435,4 +435,4 @@ LineComment(Assign[a][1], [Initialize $a$ to 1])
 <td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.2/tests/linecomment/ref/1.png" alt="image of a line comment with text 'Initialize a to 1'" width="500"></td>
 </tr>
 </tbody>
-</table>
+</grid>
