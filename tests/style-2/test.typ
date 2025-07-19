@@ -5,7 +5,7 @@
   breakable: false,
   caption-align: end,
   caption-style: emph,
-  hlines: (table.hline(stroke: 2pt + red), table.hline(stroke: 2pt + blue), table.hline(stroke: 2pt + green)),
+  hlines: (grid.hline(stroke: 2pt + red), grid.hline(stroke: 2pt + blue), grid.hline(stroke: 2pt + green)),
 )
 #algorithm-figure(
   "Binary Search",

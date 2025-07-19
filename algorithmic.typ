@@ -28,13 +28,14 @@
   caption-style: strong,
   caption-align: start,
   breakable: true,
-  hlines: (table.hline(), table.hline(), table.hline()),
+  hlines: (grid.hline(), grid.hline(), grid.hline()),
 ) = {
   show figure.where(kind: "algorithm"): it => {
     set block(breakable: breakable)
-    table(
+    grid(
       columns: 1,
       stroke: none,
+      inset: 0% + 5pt,
       hlines.at(0),
       caption-style(align(caption-align, it.caption)),
       hlines.at(1),
@@ -50,29 +51,29 @@
   if content.len() == 0 or content == (none,) {
     return none
   }
-  let table-bits = ()
+  let grid-bits = ()
   let line-number = 1
 
   let indent-list = content.map(c => c.line-indent)
   let max-indent = indent-list.sorted().last()
   let colspans = indent-list.map(i => max-indent + 1 - i)
-  let indent-content = indent-list.map(i => ([], table.vline(stroke: vstroke), []) * int(i / 2))
+  let indent-content = indent-list.map(i => ([], grid.vline(stroke: vstroke), []) * int(i / 2))
   let indents = (indent,) * max-indent
   let offset = 18pt + if indents.len() != 0 { indents.sum() }
   let columns = (18pt, ..indents, 100% - offset)
 
   while line-number <= content.len() {
-    table-bits.push([#line-number:])
-    table-bits = table-bits + indent-content.at(line-number - 1)
-    table-bits.push(table.cell(content.at(line-number - 1).line-content, colspan: colspans.at(line-number - 1)))
+    grid-bits.push([#line-number:])
+    grid-bits = grid-bits + indent-content.at(line-number - 1)
+    grid-bits.push(grid.cell(content.at(line-number - 1).line-content, colspan: colspans.at(line-number - 1)))
     line-number = line-number + 1
   }
-  return table(
+  return grid(
     columns: columns,
     // line spacing
     inset: inset,
     stroke: none,
-    ..table-bits
+    ..grid-bits
   )
 }
 
