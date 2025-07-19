@@ -366,6 +366,20 @@ Users can also define their own commands using both `Call(..args)` and
 ```
 ![image of a custom call "Solve" given parameters "A" and "b" and a custom function "mean" given parameter "x" in the algorithmic environment. The call "Solve" is rendered in smallcaps and the function "mean" is rendered in a strong emphasis.](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.2/docs/assets/custom-call-function.png)
 
+#### Standalone lines and line breaks
+
+You can use `Line` to create a standalone line and `LineBreak` to insert a line break.
+
+```typst
+#algorithm({
+  import algorithmic: *
+  Line($1+1$)
+  LineBreak
+})
+```
+![image of a standalone line with content "1+1" and a line break in the algorithmic environment](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.2/tests/line/ref/1.png)
+
+
 #### Comments
 
 There are three kinds of comments: `Comment`, `CommentInline`, and `LineComment`.
