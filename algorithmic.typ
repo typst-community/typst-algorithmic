@@ -127,8 +127,8 @@
 #let Procedure = call.with(kw: "procedure")
 
 // Misc
-#let State(block) = ((body: block),)
-#let LineBreak = State[]
+#let Line(block) = (block,)
+#let LineBreak = Line[]
 
 /// Inline call
 #let CallInline(name, args) = call(inline: true, name, args)
