@@ -57,7 +57,8 @@
   let max-indent = indent-list.sorted().last()
   let colspans = indent-list.map(i => max-indent + 1 - i)
   let indent-content = indent-list.map(i => ([], table.vline(stroke: vstroke), []) * int(i / 2))
-  let columns = (18pt, ..(indent,) * max-indent, 100%)
+  let indents = (indent,) * max-indent
+  let columns = (18pt, ..indents, 100% - 18pt - indents.sum())
 
   while line-number <= content.len() {
     table-bits.push([#line-number:])
@@ -82,13 +83,12 @@
   vstroke: 0pt + luma(200),
   ..bits,
 ) = {
-  return figure(
-    supplement: supplement,
-    kind: "algorithm",
-    caption: title,
-    placement: none,
-    algorithm(indent: indent, inset: inset, vstroke: vstroke, ..bits),
-  )
+  return figure(supplement: supplement, kind: "algorithm", caption: title, placement: none, algorithm(
+    indent: indent,
+    inset: inset,
+    vstroke: vstroke,
+    ..bits,
+  ))
 }
 
 #let iflike-unterminated(kw1: "", kw2: "", cond, ..body) = (
