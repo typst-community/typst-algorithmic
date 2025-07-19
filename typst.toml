@@ -21,7 +21,7 @@ exclude = [
   ".vscode",
   ".reuse",
   "package.sh",
-  ".github/workflows",
+  ".github",
 ]
 
 [tool.tytanic]
