@@ -27,13 +27,13 @@
             IfElseChain(
               $A ["mid"] < v$,
               {
-                Assign[$l$][$m + 1$]
+                Assign[$l$][$[mid] + 1$]
               },
               [$A ["mid"] > v$],
               {
-                Assign[$r$][$m - 1$]
+                Assign[$r$][$[mid] - 1$]
               },
-              Return[$m$],
+              Return[mid],
             )
           },
         )
