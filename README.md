@@ -42,11 +42,11 @@ Example:
             IfElseChain(
               $A ["mid"] < v$,
               {
-                Assign[$l$][$[mid] + 1$]
+                Assign[$l$][$"mid" + 1$]
               },
               [$A ["mid"] > v$],
               {
-                Assign[$r$][$[mid] - 1$]
+                Assign[$r$][$"mid" - 1$]
               },
               Return[mid],
             )
