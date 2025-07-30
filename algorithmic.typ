@@ -141,7 +141,7 @@
 #let Call(..args) = (CallInline(..args),)
 #let Fn(..args) = (FnInline(..args),)
 #let Comment(c) = (CommentInline(c),)
-#let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)],)
+#let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1),)
 
 // Control flow
 #let If = iflike.with(kw1: "if", kw2: "then", kw3: "end")
