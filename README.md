@@ -150,7 +150,7 @@ Algorithmic provides basic control flow statements: `If`, `While`, `For`,
 `Else`, `ElseIf`, and a `IfElseChain` utility.
 
 <!-- Table -->
-<grid>
+<table>
 <thead>
 <tr>
 <th>Statement</th>
@@ -253,14 +253,14 @@ IfElseChain( // Alternating content and bits
 <td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.3/tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x" width="500"></td>
 </tr>
 </tbody>
-</grid>
+</table>
 
 #### Commands
 
 The package provides a few commands: `Function`, `Procedure`, `Assign`,
 `Return`, `Terminate` and `Break`.
 
-<grid>
+<table>
 <thead>
 <tr>
 <th>Command</th>
@@ -347,7 +347,7 @@ Break()
 <td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.3/tests/break/ref/1.png" alt="image of a break statement" width="500"></td>
 </tr>
 </tbody>
-</grid>
+</table>
 
 Users can also define their own commands using both `Call(..args)` and
 `Fn(..args)` and their inline versions `CallInline` and `FnInline`.
@@ -388,7 +388,7 @@ There are three kinds of comments: `Comment`, `CommentInline`, and `LineComment`
 2. `CommentInline` is an inline comment that returns content on the same line.
 3. `LineComment` places a comment on the same line as a line of code to the right.
 
-<grid>
+<table>
 <thead>
 <tr>
 <th>Comment</th>
@@ -435,4 +435,4 @@ LineComment(Assign[a][1], [Initialize $a$ to 1])
 <td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.3/tests/linecomment/ref/1.png" alt="image of a line comment with text 'Initialize a to 1'" width="500"></td>
 </tr>
 </tbody>
-</grid>
+</table>
