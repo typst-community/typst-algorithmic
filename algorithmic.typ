@@ -85,7 +85,7 @@
   vstroke: 0pt + luma(200),
   ..bits,
 ) = {
-  return figure(supplement: supplement, kind: "algorithm", caption: title, placement: none, algorithm(
+  return figure(supplement: supplement, kind: "algorithm", caption: title, algorithm(
     indent: indent,
     inset: inset,
     vstroke: vstroke,
