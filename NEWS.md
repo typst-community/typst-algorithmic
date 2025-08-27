@@ -15,6 +15,9 @@
 > ```
 > ![Screenshot of an algorithm showing a for-loop from i = 1 to 10, with each iteration containing a line calculation (1+1) and a nested while-loop from j = 1 to 10 assigning x = 1, with line comments describing "This is inside a nested block" and "This is a line comment after a block".](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.4/tests/linecommentfor/ref/1.png)
 
+> ![INFO]
+> `algorithm-figure` does not set `placement: none` anymore (#21).
+
 
 ## v1.0.3
 
