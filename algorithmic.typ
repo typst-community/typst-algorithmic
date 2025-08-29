@@ -24,15 +24,17 @@
 }
 
 #let style-algorithm(
-  it,
+  body,
   caption-style: strong,
   caption-align: start,
   breakable: true,
   hlines: (grid.hline(), grid.hline(), grid.hline()),
+  placement: none,
+  scope: "column",
 ) = {
   show figure.where(kind: "algorithm"): it => {
     set block(breakable: breakable)
-    grid(
+    let algo = grid(
       columns: 1,
       stroke: none,
       inset: 0% + 5pt,
@@ -42,8 +44,17 @@
       align(start, it.body),
       hlines.at(2),
     )
+    let _placement = placement
+    let _scope = scope
+    if it.placement != none { _placement = it.placement }
+    if it.scope != "column" { _scope = it.scope }
+    if _placement != none {
+      place(_placement, scope: _scope, float: true, algo)
+    } else {
+      algo
+    }
   }
-  it
+  body
 }
 
 #let algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), ..bits) = {
@@ -141,7 +152,7 @@
 #let Call(..args) = (CallInline(..args),)
 #let Fn(..args) = (FnInline(..args),)
 #let Comment(c) = (CommentInline(c),)
-#let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1),)
+#let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1))
 
 // Control flow
 #let If = iflike.with(kw1: "if", kw2: "then", kw3: "end")

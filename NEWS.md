@@ -1,5 +1,18 @@
 # Algorithmic NEWS
 
+## v1.0.5
+
+> ![INFO]
+> Fix an issue with `algorithm-figure` float placement (#21).
+> `style-algorithm` now has options `placement` and `scope` mimicking `figure`.
+> By default, options set on `figure(kind: "algorithm")` supersede those of
+> `style-algorithm`.
+> ```typ
+> #show: style-algorithm.with(placement: top, scope: "column")
+> #show figure.where(kind: "algorithm").with(placement: bottom, scope: "parent")
+> ```
+> The above example will place algorithm figures at the bottom of the parent scope.
+
 ## v1.0.4
 
 > ![INFO]
