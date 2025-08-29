@@ -25,4 +25,4 @@ exclude = [
 ]
 
 [tool.tytanic]
-default.ppi = 1200
+default.ppi = 300
