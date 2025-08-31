@@ -3,6 +3,18 @@
 ## v1.0.5
 
 > ![INFO]
+> Added an option `line-numbers` to toggle line numbers on/off (#22).
+> ```typ
+> #algorithm(line-numbers: false, ...)
+> #algorithm-figure(line-numbers: false, ...)
+> ```
+> If you would like to remove line numbers globally, you can define
+> ```typ
+> #let algorithm = algorithm.with(line-numbers: false)
+> #let algorithm-figure = algorithm-figure.with(line-numbers: false)
+> ```
+
+> ![INFO]
 > Fix an issue with `algorithm-figure` float placement (#21).
 > `style-algorithm` now has options `placement` and `scope` mimicking `figure`.
 > By default, options set on `figure(kind: "algorithm")` supersede those of

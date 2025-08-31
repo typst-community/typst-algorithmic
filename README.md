@@ -68,7 +68,7 @@ arrays gets those arrays joined together.
 
 ### Documentation
 
-#### `algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), ..bits)`
+#### `algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, ..bits)`
 
 This is the main function of the package. It takes a list of arrays and
 returns a typesetting of the algorithm. You can modify the inset
@@ -78,6 +78,8 @@ between lines with the `inset` parameter.
 #algorithm(
   inset: 1em, // more spacing between lines
   indent: 0.5em, // indentation for the algorithm
+  vstroke: 0pt + luma(200), // vertical stroke for indentation guide
+  line-numbers: true, // show line numbers
   { // provide an array
     import algorithmic: * // import all names in the array
     Assign[$x$][$y$]
@@ -94,26 +96,34 @@ between lines with the `inset` parameter.
 ```
 ![image of the algorithm with three lines of code assigning x to y, y to x, and z to x + y. The inset is set to 1em, the indent to 0.5em](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.4/tests/algorithm/ref/1.png)
 
-#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), ..bits)`
+#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, ..bits)`
 
 The `algorithm-figure` function is a wrapper around `algorithm` that returns a
 figure element of the algorithm. It takes the same parameters as
 `algorithm`, but also takes a `title` and a `supplement` parameter for the figure.
 
 ```typst
-#let algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), ..bits) = {
-  return figure(
-    supplement: supplement,
-    kind: "algorithm", // the kind of figure
-    caption: title,
-    placement: none,
-    algorithm(inset: inset, ..bits),
-  )
+#let algorithm-figure(
+  title,
+  supplement: "Algorithm",
+  inset: 0.2em,
+  indent: 0.5em,
+  vstroke: 0pt + luma(200),
+  line-numbers: true,
+  ..bits,
+) = {
+  return figure(supplement: supplement, kind: "algorithm", caption: title, algorithm(
+    indent: indent,
+    inset: inset,
+    vstroke: vstroke,
+    line-numbers: line-numbers,
+    ..bits,
+  ))
 }
 ```
 
 In order to use the `algorithm-figure` function, you need to style the figure
-with the `style-algorithm` show rule.
+with the `style-algorithm` show rule, or provide your own styling.
 
 ```typst
 #import algorithmic: algorithm-figure, style-algorithm
@@ -130,6 +140,8 @@ with the `style-algorithm` show rule.
 - `caption-align (alignment): start` aligns the title to the start (left for LTR, and right for RTL languages) by default
 - `breakable (bool): true` controls whether or not the figure will break across pages.
 - `hlines (array of 3 content): (grid.hline(), grid.hline(), grid.hline())` provides horizontal lines at the top, middle, and bottom of the algorithm figure.
+- `placement (none, auto, top or bottom): none` controls the float placement of the algorithm figure. See [`figure(placement)`](https://typst.app/docs/reference/model/figure/#parameters-placement)
+- `scope (string): "column"` controls the floating scope of the algorithm figure. See [`figure(placement)`](https://typst.app/docs/reference/model/figure/#parameters-placement)
 
 An example of how to style the algorithm figure:
 
@@ -139,6 +151,8 @@ An example of how to style the algorithm figure:
   caption-align: end,
   caption-style: emph,
   hlines: (grid.hline(stroke: 2pt + red), grid.hline(stroke: 2pt + blue), grid.hline(stroke: 2pt + green)),
+  placement: none,
+  scope: "column",
 )
 ```
 which will result in something like
