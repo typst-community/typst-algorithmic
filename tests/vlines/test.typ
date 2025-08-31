@@ -2,7 +2,7 @@
 #import algorithmic: algorithm
 #set page(margin: .1cm, width: 4cm, height: auto)
 #algorithm(
-  v_stroke: .6pt + luma(200),
+  vstroke: .6pt + luma(200),
   {
     import algorithmic: *
     IfElseChain(
