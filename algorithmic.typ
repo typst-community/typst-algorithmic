@@ -205,6 +205,6 @@
 
 // Instructions
 #let Assign(var, val) = (var + " " + $<-$ + " " + arraify(val).join(", "),)
-#let Return(arg) = (strong("return") + " " + arg,)
+#let Return(arg) = (strong("return") + " " + arraify(arg).join(", "),)
 #let Terminate = (smallcaps("terminate"),)
 #let Break = (smallcaps("break"),)
