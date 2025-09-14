@@ -204,7 +204,7 @@
 }
 
 // Instructions
-#let Assign(var, val) = (var + " " + $<-$ + " " + val,)
+#let Assign(var, val) = (var + " " + $<-$ + " " + arraify(val).join(", "),)
 #let Return(arg) = (strong("return") + " " + arg,)
 #let Terminate = (smallcaps("terminate"),)
 #let Break = (smallcaps("break"),)
