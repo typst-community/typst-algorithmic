@@ -1,7 +1,7 @@
 [package]
 name = "algorithmic"
 version = "1.0.5"
-entrypoint = "algorithmic.typ"
+entrypoint = "src/algorithmic.typ"
 authors = ["Jade Lovelace <https://github.com/lf->", "Pascal Quach <@quachpas>"]
 license = "MIT"
 description = "Algorithm pseudocode typesetting for Typst, inspired by algorithmicx in LaTeX"
