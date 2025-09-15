@@ -1,4 +1,4 @@
-#import "../../algorithmic.typ"
+#import "/src/algorithmic.typ"
 #import algorithmic: algorithm
 #set page(margin: .1cm, width: 4.5cm, height: auto)
 #algorithm({

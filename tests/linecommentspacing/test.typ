@@ -1,4 +1,4 @@
-#import "../../algorithmic.typ"
+#import "/src/algorithmic.typ"
 #import algorithmic: *
 #set page(paper: "a4", height: auto)
 #algorithm({

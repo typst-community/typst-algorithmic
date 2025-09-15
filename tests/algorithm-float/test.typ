@@ -1,4 +1,4 @@
-#import "../../algorithmic.typ"
+#import "/src/algorithmic.typ"
 #import algorithmic: *
 #set page(paper: "a6")
 #show: style-algorithm.with(breakable: false)
