@@ -101,7 +101,7 @@
 
   assert(is-nodetype(node, nodetype), message: strfmt(
     "Invalid nodetype. Expected: '{}'. Got: '{}'.",
-    type,
+    nodetype,
     node.nodetype,
   ))
 }
