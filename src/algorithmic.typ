@@ -4,11 +4,14 @@
 // SPDX-FileCopyrightText: 2025 Contributors to the typst-algorithmic project
 // SPDX-License-Identifier: MIT
 
-#import "dsl.typ": (
-  Assign, Break, Call, CallInline, Comment, CommentInline, Else, ElseIf, Fn,
-  FnInline, For, Function, If, IfElseChain, Line, LineBreak, LineComment,
-  Procedure, Return, Terminate, While,
-)
+#import "dsl.typ" as dsl
+#import dsl: *
+
+// #import "dsl.typ": (
+//   Assign, Break, Call, CallInline, Comment, CommentInline, Else, ElseIf, Fn,
+//   FnInline, For, Function, If, IfElseChain, Line, LineBreak, LineComment,
+//   Procedure, Return, Terminate, While,
+// )
 
 /*
  * Generated AST:
