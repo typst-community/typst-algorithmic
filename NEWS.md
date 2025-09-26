@@ -1,5 +1,18 @@
 # Algorithmic NEWS
 
+## v1.0.6
+
+> ![INFO]
+> @TimeTravelPenguin fixed an issue with `Assign` not working with nested blocks (#23, #24).
+>
+> Algorithms similar to the one below will now render correctly.
+> ```typ
+> #{
+>   let Solve = Call.with("Solve")
+>   Assign($x$, Solve[$A$, $b$])
+> }
+> ```
+
 ## v1.0.5
 
 > ![INFO]
