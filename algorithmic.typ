@@ -185,7 +185,13 @@
 #let Call(..args) = (CallInline(..args),)
 #let Fn(..args) = (FnInline(..args),)
 #let Comment(c) = (CommentInline(c),)
-#let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1))
+#let LineComment(l, c) = {
+  if type(l) == array and l.len() > 0 { 
+    ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1)) 
+  } else {
+    ([#l#h(1fr)#CommentInline(c)],)
+  }
+}
 
 // Control flow
 #let If = iflike.with(kw1: "if", kw2: "then", kw3: "end")
