@@ -1,5 +1,18 @@
 # Algorithmic NEWS
 
+## v1.0.7
+
+> ![INFO]
+> @nonl4331 fixed an issue with `LineComment` not working with certain input types (#27, #28).
+>
+> LineComment statements similar to the instances below will now render correctly.
+> ```typ
+> #{
+>   LineComment([Initialize hashmap], [Count instances])
+>   LineComment([$c += a-b$], [Sum of differences])
+> }
+> ```
+
 ## v1.0.6
 
 > ![INFO]
