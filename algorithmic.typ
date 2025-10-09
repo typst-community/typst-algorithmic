@@ -76,10 +76,10 @@
   let colspans = indent-list.map(i => max-indent + 1 - i)
   let indent-content = indent-list.map(i => ([], grid.vline(stroke: vstroke), []) * int(i / 2))
   let indents = (indent,) * max-indent
-  let offset = 18pt + if indents.len() != 0 { indents.sum() }
+  let offset = 1.4em + if indents.len() != 0 { indents.sum() }
   let columns = (..indents, 100% - offset)
   if line-numbers {
-    columns.insert(0, 18pt)
+    columns.insert(0, 1.4em)
   }
 
   while line-number <= content.len() {
