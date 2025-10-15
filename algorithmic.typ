@@ -164,11 +164,8 @@
 #let Fn(..args) = (FnInline(..args),)
 #let Comment(c) = (CommentInline(c),)
 #let LineComment(l, c) = {
-  if type(l) == array and l.len() > 0 { 
-    ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1)) 
-  } else {
-    ([#l#h(1fr)#CommentInline(c)],)
-  }
+  let l = arraify(l).flatten()
+  ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1)) 
 }
 
 // Control flow
