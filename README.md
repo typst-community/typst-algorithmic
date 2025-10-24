@@ -266,6 +266,18 @@ IfElseChain( // Alternating content and bits
 </td>
 <td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x" width="500"></td>
 </tr>
+<tr>
+<td><code>IfElseInline</code></td>
+<td><code>IfElseInline(condition: content, true-case: content, false-case: content)</code></td>
+<td>
+
+```typst
+Assign($m$, IfElseInline($x < y$, $x$, $y$))
+```
+
+</td>
+<td><!-- todo image --></td>
+</tr>
 </tbody>
 </table>
 
