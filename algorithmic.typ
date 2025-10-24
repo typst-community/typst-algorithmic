@@ -230,6 +230,9 @@
   }
   result
 }
+#let IfElseInline(condition, true-case, false-case) = (
+  [#true-case *if* #condition *else* #false-case],
+)
 
 // Instructions
 #let Assign(var, val) = (var + " " + $<-$ + " " + arraify(val).join(", "),)
