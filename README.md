@@ -276,7 +276,7 @@ Assign($m$, IfElseInline($x < y$, $x$, $y$))
 ```
 
 </td>
-<td><!-- todo image --></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/ifelseinline/ref/1.png" alt="image of an ifelseinline expression with condition x < y, true expression x, and false expression y being assigned to m" width="500"></td>
 </tr>
 </tbody>
 </table>
