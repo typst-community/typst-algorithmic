@@ -7,17 +7,30 @@ on:
     branches:
       - '**'
 
+# https://github.com/tingerrr/hydra/blob/main/.github/workflows/ci.yml
 jobs:
-  ci:
+  test-matrix:
+    strategy:
+      matrix:
+        typst: [0.13.0, 0.13.1, 0.14.0]
+        tytanic: [0.3.1]
+    name: typst@${{ matrix.typst }} & tytanic@${{ matrix.tytanic }}
     runs-on: ubuntu-latest
     if: github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v4
-      - name: Install tytanic
-        uses: taiki-e/cache-cargo-install-action@v2
+      - name: Install typst
+        uses: typst-community/setup-typst@v3
         with:
-          tool: tytanic@0.3.1
-      - name: Run test suite
+          typst-version: ${{ matrix.typst }}
+      - name: Install tytanic
+        uses: typst-community/setup-tytanic@v1
+        with:
+          tytanic-version: ${{ matrix.tytanic }}
+      - name: Versions
         run: |
+          typst --version
           tt --version
-          tt run
+      - name: Test suite
+        run: |
+          tt run -F

@@ -74,7 +74,9 @@
   let indent-list = content.map(c => c.line-indent)
   let max-indent = indent-list.sorted().last()
   let colspans = indent-list.map(i => max-indent + 1 - i)
-  let indent-content = indent-list.map(i => ([], grid.vline(stroke: vstroke), []) * int(i / 2))
+  let indent-content = indent-list.map(i => (
+    ([], grid.vline(stroke: vstroke), []) * int(i / 2)
+  ))
   let indents = (indent,) * max-indent
   let offset = 18pt + if indents.len() != 0 { indents.sum() }
   let columns = (..indents, 100% - offset)
@@ -85,7 +87,10 @@
   while line-number <= content.len() {
     if line-numbers { grid-bits.push([#line-number:]) }
     grid-bits = grid-bits + indent-content.at(line-number - 1)
-    grid-bits.push(grid.cell(content.at(line-number - 1).line-content, colspan: colspans.at(line-number - 1)))
+    grid-bits.push(grid.cell(
+      content.at(line-number - 1).line-content,
+      colspan: colspans.at(line-number - 1),
+    ))
     line-number = line-number + 1
   }
   return grid(
@@ -106,13 +111,18 @@
   line-numbers: true,
   ..bits,
 ) = {
-  return figure(supplement: supplement, kind: "algorithm", caption: title, algorithm(
-    indent: indent,
-    inset: inset,
-    vstroke: vstroke,
-    line-numbers: line-numbers,
-    ..bits,
-  ))
+  return figure(
+    supplement: supplement,
+    kind: "algorithm",
+    caption: title,
+    algorithm(
+      indent: indent,
+      inset: inset,
+      vstroke: vstroke,
+      line-numbers: line-numbers,
+      ..bits,
+    ),
+  )
 }
 
 #let iflike-unterminated(kw1: "", kw2: "", cond, ..body) = (
@@ -138,11 +148,23 @@
     (v,)
   }
 }
-#let call(name, kw: "function", inline: false, style: smallcaps, args, ..body) = (
+#let call(
+  name,
+  kw: "function",
+  inline: false,
+  style: smallcaps,
+  args,
+  ..body,
+) = (
   if inline {
     [#style(name)\(#arraify(args).join(", ")\)]
   } else {
-    iflike(kw1: kw, kw3: "end", (style(name) + $(#arraify(args).join(", "))$), ..body)
+    iflike(
+      kw1: kw,
+      kw3: "end",
+      (style(name) + $(#arraify(args).join(", "))$),
+      ..body,
+    )
   }
 )
 
