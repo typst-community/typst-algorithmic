@@ -78,12 +78,16 @@
   let indents = (indent,) * max-indent
   let offset = 18pt + if indents.len() != 0 { indents.sum() }
   let columns = (..indents, 100% - offset)
-  if line-numbers {
+  if line-numbers != false {
     columns.insert(0, 18pt)
   }
 
   while line-number <= content.len() {
-    if line-numbers { grid-bits.push([#line-number:]) }
+    if line-numbers == true {
+      grid-bits.push([#line-number:])
+    } else if type(line-numbers) == function {
+      grid-bits.push(line-numbers(line-number))
+    }
     grid-bits = grid-bits + indent-content.at(line-number - 1)
     grid-bits.push(grid.cell(content.at(line-number - 1).line-content, colspan: colspans.at(line-number - 1)))
     line-number = line-number + 1
