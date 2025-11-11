@@ -3,6 +3,12 @@
 ## v1.0.7
 
 > ![INFO]
+> @wamserma fixed an issue with the width of the column offset not scaling with
+> the font size (#26).
+> Now, the column is specified relative to the font size in [`em`](https://typst.app/docs/reference/layout/length/).
+> This is not a breaking change.
+
+> ![INFO]
 > @nonl4331 fixed an issue with `LineComment` not working with certain input types (#27, #28).
 >
 > LineComment statements similar to the instances below will now render correctly.

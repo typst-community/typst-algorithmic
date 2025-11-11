@@ -62,6 +62,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
+  horizontal-offset: 1.63640em,
   ..bits,
 ) = {
   let content = bits.pos().map(b => ast-to-content-list(0, b)).flatten()
@@ -78,10 +79,10 @@
     ([], grid.vline(stroke: vstroke), []) * int(i / 2)
   ))
   let indents = (indent,) * max-indent
-  let offset = 18pt + if indents.len() != 0 { indents.sum() }
+  let offset = horizontal-offset + if indents.len() != 0 { indents.sum() }
   let columns = (..indents, 100% - offset)
   if line-numbers {
-    columns.insert(0, 18pt)
+    columns.insert(0, horizontal-offset)
   }
 
   while line-number <= content.len() {
@@ -109,6 +110,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
+  horizontal-offset: 1.63640em,
   ..bits,
 ) = {
   return figure(
@@ -120,6 +122,7 @@
       inset: inset,
       vstroke: vstroke,
       line-numbers: line-numbers,
+      horizontal-offset: horizontal-offset,
       ..bits,
     ),
   )
@@ -187,7 +190,7 @@
 #let Comment(c) = (CommentInline(c),)
 #let LineComment(l, c) = {
   let l = arraify(l).flatten()
-  ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1)) 
+  ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1))
 }
 
 // Control flow
