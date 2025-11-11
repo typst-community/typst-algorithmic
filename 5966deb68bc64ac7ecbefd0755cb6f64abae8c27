@@ -1,2 +1,9 @@
 [ver:1,total:120]
 .gtm/terminal.app:120,1762858800:120,r
+
+[ver:1,total:180]
+NEWS.md:95,1762858800:95,m
+typst.toml:35,1762858800:35,r
+.gtm/terminal.app:25,1762858800:25,r
+tests/ifelseinline/test.typ:15,1762858800:15,r
+README.md:10,1762858800:10,r
