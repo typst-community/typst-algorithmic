@@ -2,13 +2,21 @@
 
 ## v1.0.7
 
-> ![INFO]
+> [!NOTE]
+> @avlouis added inline command `IfElseInline` for ternary if-then-else statements (#31).
+> ```typ
+> #{
+>   Assign($m$, IfElseInline($x < y$, $x$, $y$))
+> }
+> ```
+
+> [!NOTE]
 > @wamserma fixed an issue with the width of the column offset not scaling with
 > the font size (#26).
 > Now, the column is specified relative to the font size in [`em`](https://typst.app/docs/reference/layout/length/).
 > This is not a breaking change.
 
-> ![INFO]
+> [!NOTE]
 > @nonl4331 fixed an issue with `LineComment` not working with certain input types (#27, #28).
 >
 > LineComment statements similar to the instances below will now render correctly.
@@ -21,7 +29,7 @@
 
 ## v1.0.6
 
-> ![INFO]
+> [!NOTE]
 > @TimeTravelPenguin fixed an issue with `Assign` not working with nested blocks (#23, #24).
 >
 > Algorithms similar to the one below will now render correctly.
@@ -34,7 +42,7 @@
 
 ## v1.0.5
 
-> ![INFO]
+> [!NOTE]
 > Added an option `line-numbers` to toggle line numbers on/off (#22).
 > ```typ
 > #algorithm(line-numbers: false, ...)
@@ -46,7 +54,7 @@
 > #let algorithm-figure = algorithm-figure.with(line-numbers: false)
 > ```
 
-> ![INFO]
+> [!NOTE]
 > Fix an issue with `algorithm-figure` float placement (#21).
 > `style-algorithm` now has options `placement` and `scope` mimicking `figure`.
 > By default, options set on `figure(kind: "algorithm")` supersede those of
@@ -59,7 +67,7 @@
 
 ## v1.0.4
 
-> ![INFO]
+> [!NOTE]
 > @drecouse fixed an issue with `LineComment` preventing loops' body from displaying (#20).
 > Now, you can use `LineComment` on loops without issues.
 > ```typ
@@ -70,20 +78,20 @@
 >   "This is inside a nested block",
 > )
 > ```
-> ![Screenshot of an algorithm showing a for-loop from i = 1 to 10, with each iteration containing a line calculation (1+1) and a nested while-loop from j = 1 to 10 assigning x = 1, with line comments describing "This is inside a nested block" and "This is a line comment after a block".](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.4/tests/linecommentfor/ref/1.png)
+> [!Screenshot of an algorithm showing a for-loop from i = 1 to 10, with each iteration containing a line calculation (1+1) and a nested while-loop from j = 1 to 10 assigning x = 1, with line comments describing "This is inside a nested block" and "This is a line comment after a block".](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.4/tests/linecommentfor/ref/1.png)
 
-> ![INFO]
+> [!NOTE]
 > `algorithm-figure` does not set `placement: none` anymore (#21).
 
 
 ## v1.0.3
 
-> ![WARNING]
+> [!WARNING]
 > algorithmic now use grids instead of tables for accessibility purposes, see [layout/grid](https://typst.app/docs/reference/layout/grid/#:~:text=Typst%20will%20annotate%20its%20output%20such%20that%20screenreaders%20will%20announce%20content%20in%20table%20as%20tabular).
 > Any `table.hlines` in `style-algorithm` will error and `grid.hlines` must be used instead.
 
-> ![INFO]
+> [!NOTE]
 > This version fixes an issue with the indentation offset where the last column corresponding to comments goes in the margin.
 
-> ![INFO]
+> [!NOTE]
 > `State` is renamed to `Line` and will now work with other commands such as `LineComment`. Documentation is added in the [README](README.md).
