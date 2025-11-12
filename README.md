@@ -73,6 +73,7 @@ arrays gets those arrays joined together.
 This is the main function of the package. It takes a list of arrays and
 returns a typesetting of the algorithm. You can modify the inset
 between lines with the `inset` parameter.
+If you want to customize line numbers, you can pass a function, that takes a number and returns content, to the line-numbers parameter instead of a boolean value.
 
 ```typst
 #algorithm(
