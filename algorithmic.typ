@@ -62,6 +62,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
+  horizontal-offset: 1.63640em,
   ..bits,
 ) = {
   let content = bits.pos().map(b => ast-to-content-list(0, b)).flatten()
@@ -74,12 +75,14 @@
   let indent-list = content.map(c => c.line-indent)
   let max-indent = indent-list.sorted().last()
   let colspans = indent-list.map(i => max-indent + 1 - i)
-  let indent-content = indent-list.map(i => ([], grid.vline(stroke: vstroke), []) * int(i / 2))
+  let indent-content = indent-list.map(i => (
+    ([], grid.vline(stroke: vstroke), []) * int(i / 2)
+  ))
   let indents = (indent,) * max-indent
-  let offset = 18pt + if indents.len() != 0 { indents.sum() }
+  let offset = horizontal-offset + if indents.len() != 0 { indents.sum() }
   let columns = (..indents, 100% - offset)
   if line-numbers != false {
-    columns.insert(0, 18pt)
+    columns.insert(0, horizontal-offset)
   }
 
   while line-number <= content.len() {
@@ -89,7 +92,10 @@
       grid-bits.push(line-numbers(line-number))
     }
     grid-bits = grid-bits + indent-content.at(line-number - 1)
-    grid-bits.push(grid.cell(content.at(line-number - 1).line-content, colspan: colspans.at(line-number - 1)))
+    grid-bits.push(grid.cell(
+      content.at(line-number - 1).line-content,
+      colspan: colspans.at(line-number - 1),
+    ))
     line-number = line-number + 1
   }
   return grid(
@@ -108,15 +114,22 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
+  horizontal-offset: 1.63640em,
   ..bits,
 ) = {
-  return figure(supplement: supplement, kind: "algorithm", caption: title, algorithm(
-    indent: indent,
-    inset: inset,
-    vstroke: vstroke,
-    line-numbers: line-numbers,
-    ..bits,
-  ))
+  return figure(
+    supplement: supplement,
+    kind: "algorithm",
+    caption: title,
+    algorithm(
+      indent: indent,
+      inset: inset,
+      vstroke: vstroke,
+      line-numbers: line-numbers,
+      horizontal-offset: horizontal-offset,
+      ..bits,
+    ),
+  )
 }
 
 #let iflike-unterminated(kw1: "", kw2: "", cond, ..body) = (
@@ -142,11 +155,23 @@
     (v,)
   }
 }
-#let call(name, kw: "function", inline: false, style: smallcaps, args, ..body) = (
+#let call(
+  name,
+  kw: "function",
+  inline: false,
+  style: smallcaps,
+  args,
+  ..body,
+) = (
   if inline {
     [#style(name)\(#arraify(args).join(", ")\)]
   } else {
-    iflike(kw1: kw, kw3: "end", (style(name) + $(#arraify(args).join(", "))$), ..body)
+    iflike(
+      kw1: kw,
+      kw3: "end",
+      (style(name) + $(#arraify(args).join(", "))$),
+      ..body,
+    )
   }
 )
 
@@ -167,7 +192,10 @@
 #let Call(..args) = (CallInline(..args),)
 #let Fn(..args) = (FnInline(..args),)
 #let Comment(c) = (CommentInline(c),)
-#let LineComment(l, c) = ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1))
+#let LineComment(l, c) = {
+  let l = arraify(l).flatten()
+  ([#l.first()#h(1fr)#CommentInline(c)], ..l.slice(1))
+}
 
 // Control flow
 #let If = iflike.with(kw1: "if", kw2: "then", kw3: "end")
@@ -206,6 +234,9 @@
   }
   result
 }
+#let IfElseInline(condition, true-case, false-case) = (
+  [#true-case *if* #condition *else* #false-case],
+)
 
 // Instructions
 #let Assign(var, val) = (var + " " + $<-$ + " " + arraify(val).join(", "),)
