@@ -13,15 +13,6 @@
     Assign($y$, str(i))
   }
 })
-#algorithm(
-  line-numbers: num => str(num) + "|",
-  {
-    import algorithmic: *
-    for i in range(1, 5) {
-      Assign($y$, str(i))
-    }
-  },
-)
 
 #show: style-algorithm
 #let algorithm = algorithm.with(line-numbers: false)

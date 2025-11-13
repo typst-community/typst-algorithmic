@@ -62,6 +62,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
+  line-numbers-format: none,
   horizontal-offset: 1.63640em,
   ..bits,
 ) = {
@@ -81,15 +82,17 @@
   let indents = (indent,) * max-indent
   let offset = horizontal-offset + if indents.len() != 0 { indents.sum() }
   let columns = (..indents, 100% - offset)
-  if line-numbers != false {
+  if line-numbers == true {
     columns.insert(0, horizontal-offset)
   }
 
   while line-number <= content.len() {
     if line-numbers == true {
-      grid-bits.push([#line-number:])
-    } else if type(line-numbers) == function {
-      grid-bits.push(line-numbers(line-number))
+      if line-numbers-format == none {
+        grid-bits.push([#line-number:])
+      } else {
+        grid-bits.push(line-numbers-format(line-number))
+      }
     }
     grid-bits = grid-bits + indent-content.at(line-number - 1)
     grid-bits.push(grid.cell(
@@ -114,6 +117,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
+  line-numbers-format: none,
   horizontal-offset: 1.63640em,
   ..bits,
 ) = {
@@ -126,6 +130,7 @@
       inset: inset,
       vstroke: vstroke,
       line-numbers: line-numbers,
+      line-numbers-format: line-numbers-format,
       horizontal-offset: horizontal-offset,
       ..bits,
     ),
