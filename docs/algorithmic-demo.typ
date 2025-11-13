@@ -47,7 +47,9 @@
 
 #quote(
   block: true,
-  attribution: [Wikipedia contributors. (2025, May 11). Binary search. In Wikipedia, The Free Encyclopedia. Retrieved 08:38, May 17, 2025, from https://en.wikipedia.org/w/index.php?title=Binary_search&oldid=1289880683],
+  attribution: [Wikipedia contributors. (2025, May 11). Binary search. In
+    Wikipedia, The Free Encyclopedia. Retrieved 08:38, May 17, 2025, from
+    https://en.wikipedia.org/w/index.php?title=Binary_search&oldid=1289880683],
 )[
   In computer science, binary search, also known as half-interval search,
   logarithmic search, or binary chop, is a search algorithm that finds the

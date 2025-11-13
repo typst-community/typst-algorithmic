@@ -12,9 +12,29 @@ jobs:
   test-matrix:
     strategy:
       matrix:
-        typst: [0.13.0, 0.13.1, 0.14.0]
-        tytanic: [0.3.1]
+        # https://typst-community.github.io/tytanic/reference/compat.html
+        # 0.2.2 -> 0.13.0
+        # 0.3.1 -> 0.14.0
+        tytanic: [0.2.2, 0.3.1]
     name: typst@${{ matrix.typst }} & tytanic@${{ matrix.tytanic }}
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Install tytanic
+        uses: typst-community/setup-tytanic@v1
+        with:
+          tytanic-version: ${{ matrix.tytanic }}
+      - name: Versions
+        run: |
+          tt --version
+      - name: Test suite
+        run: |
+          tt run -F
+  docs-matrix:
+    strategy:
+      matrix:
+        typst: [0.13.1, 0.14.0]
+    name: Docs typst@${{ matrix.typst }}
     runs-on: ubuntu-latest
     if: github.event.pull_request.draft == false
     steps:
@@ -23,14 +43,9 @@ jobs:
         uses: typst-community/setup-typst@v3
         with:
           typst-version: ${{ matrix.typst }}
-      - name: Install tytanic
-        uses: typst-community/setup-tytanic@v1
-        with:
-          tytanic-version: ${{ matrix.tytanic }}
       - name: Versions
         run: |
           typst --version
-          tt --version
-      - name: Test suite
-        run: |
-          tt run -F
+      - name: Build docs
+        run: | # make sure docs build without errors or warnings
+          just docs
