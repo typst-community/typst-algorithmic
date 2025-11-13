@@ -1,0 +1,13 @@
+[ver:1,total:60]
+.github/workflows/test.yml:24,1763035200:24,m
+.gtm/terminal.app:24,1763035200:24,r
+justfile:12,1763035200:12,m
+
+[ver:1,total:60]
+justfile:40,1763035200:40,m
+.gtm/terminal.app:20,1763035200:20,r
+
+[ver:1,total:240]
+justfile:140,1763035200:140,m
+.gtm/terminal.app:80,1763035200:80,r
+.github/workflows/test.yml:20,1763035200:20,r
