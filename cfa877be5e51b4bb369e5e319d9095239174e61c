@@ -1,0 +1,7 @@
+[ver:1,total:540]
+.github/workflows/test.yml:313,1762884000:180,1763035200:133,m
+justfile:137,1763035200:137,r
+.gtm/terminal.app:35,1763035200:35,r
+typst.toml:23,1763035200:23,r
+docs/algorithmic-demo.typ:20,1763035200:20,m
+README.md:12,1763035200:12,r
