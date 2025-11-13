@@ -16,10 +16,11 @@ jobs:
         # 0.2.2 -> 0.13.0
         # 0.3.1 -> 0.14.0
         tytanic: [0.2.2, 0.3.1]
-    name: typst@${{ matrix.typst }} & tytanic@${{ matrix.tytanic }}
+    name: tytanic@${{ matrix.tytanic }}
     runs-on: ubuntu-latest
     if: github.event.pull_request.draft == false
     steps:
+      - uses: actions/checkout@v4
       - name: Install tytanic
         uses: typst-community/setup-tytanic@v1
         with:
@@ -48,4 +49,5 @@ jobs:
           typst --version
       - name: Build docs
         run: | # make sure docs build without errors or warnings
-          just docs
+          find docs/*.typ -type f | xargs -I {} fish -c 'echo ------ Compiling $argv[1] && time {{typst}} compile --root . $argv[1] docs/assets/$(basename $argv[1] .typ).png' {}
+
