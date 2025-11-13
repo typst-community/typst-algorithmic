@@ -68,7 +68,7 @@ arrays gets those arrays joined together.
 
 ### Documentation
 
-#### `algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, ..bits)`
+#### `algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, line-numbers-format: none, ..bits)`
 
 This is the main function of the package. It takes a list of arrays and
 returns a typesetting of the algorithm. You can modify the inset
@@ -97,7 +97,7 @@ If you want to customize line numbers, you can pass a function, that takes a num
 ```
 ![image of the algorithm with three lines of code assigning x to y, y to x, and z to x + y. The inset is set to 1em, the indent to 0.5em](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/algorithm/ref/1.png)
 
-#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, ..bits)`
+#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, line-numbers-format: none, ..bits)`
 
 The `algorithm-figure` function is a wrapper around `algorithm` that returns a
 figure element of the algorithm. It takes the same parameters as

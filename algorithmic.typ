@@ -62,6 +62,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
+  line-numbers-format: none,
   horizontal-offset: 1.63640em,
   ..bits,
 ) = {
@@ -110,6 +111,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
+  line-numbers-format: none,
   horizontal-offset: 1.63640em,
   ..bits,
 ) = {
@@ -122,6 +124,7 @@
       inset: inset,
       vstroke: vstroke,
       line-numbers: line-numbers,
+      line-numbers-format: line-numbers-format,
       horizontal-offset: horizontal-offset,
       ..bits,
     ),
