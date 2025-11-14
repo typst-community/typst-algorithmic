@@ -73,7 +73,7 @@ arrays gets those arrays joined together.
 This is the main function of the package. It takes a list of arrays and
 returns a typesetting of the algorithm. You can modify the inset
 between lines with the `inset` parameter.
-If you want to customize line numbers, you can pass a function, that takes a number and returns content, to the line-numbers parameter instead of a boolean value.
+If you want to customize line numbers, you can pass a function, that takes a number and returns content, to the `line-numbers-format` parameter instead of a boolean value.
 
 ```typst
 #algorithm(
@@ -81,6 +81,7 @@ If you want to customize line numbers, you can pass a function, that takes a num
   indent: 0.5em, // indentation for the algorithm
   vstroke: 0pt + luma(200), // vertical stroke for indentation guide
   line-numbers: true, // show line numbers
+  line-numbers-format: num => str(num) + "|", // change the line numbers format
   { // provide an array
     import algorithmic: * // import all names in the array
     Assign[$x$][$y$]
