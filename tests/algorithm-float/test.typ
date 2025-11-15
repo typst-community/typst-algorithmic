@@ -48,15 +48,19 @@
 #[
   #columns(2)[
     #lorem(60)
-    #show figure.where(kind: "algorithm"): set figure(placement: auto, scope: "parent")
+    #show figure.where(kind: "algorithm"): set figure(
+      placement: auto,
+      scope: "parent",
+    )
     #fig("placement: auto (bottom), scope: parent")
   ]
 ]
 #pagebreak()
 #[
-  #show: style-algorithm.with(breakable: true, placement: bottom, scope: "column")
+  #show: style-algorithm.with(
+    breakable: true,
+    placement: bottom,
+    scope: "column",
+  )
   #fig("style-algorithm with breakable: true, placement: bottom, scope: column")
 ]
-
-#pagebreak()
-#context query(figure.where(kind: "algorithm")).map(it => (it.placement, it.scope))
