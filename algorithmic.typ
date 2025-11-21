@@ -62,7 +62,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
-  line-numbers-format: none,
+  line-numbers-format: x => [#x:],
   horizontal-offset: 1.63640em,
   ..bits,
 ) = {
@@ -87,7 +87,9 @@
   }
 
   while line-number <= content.len() {
-    if line-numbers { grid-bits.push([#line-number:]) }
+    if line-numbers {
+      grid-bits.push(line-numbers-format(line-number))
+    }
     grid-bits = grid-bits + indent-content.at(line-number - 1)
     grid-bits.push(grid.cell(
       content.at(line-number - 1).line-content,
@@ -111,7 +113,7 @@
   indent: 0.5em,
   vstroke: 0pt + luma(200),
   line-numbers: true,
-  line-numbers-format: none,
+  line-numbers-format: x => [#x:],
   horizontal-offset: 1.63640em,
   ..bits,
 ) = {
