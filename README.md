@@ -68,12 +68,12 @@ arrays gets those arrays joined together.
 
 ### Documentation
 
-#### `algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, line-numbers-format: none, ..bits)`
+#### `algorithm(inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, line-numbers-format: x => [#x:], ..bits)`
 
 This is the main function of the package. It takes a list of arrays and
 returns a typesetting of the algorithm. You can modify the inset
 between lines with the `inset` parameter.
-If you want to customize line numbers, you can pass a function, that takes a number and returns content, to the `line-numbers-format` parameter instead of a boolean value.
+If you want to customize line numbers, you can pass a function, that takes a number and returns **content**, to the `line-numbers-format` parameter instead of a default value.
 
 ```typst
 #algorithm(
@@ -81,7 +81,7 @@ If you want to customize line numbers, you can pass a function, that takes a num
   indent: 0.5em, // indentation for the algorithm
   vstroke: 0pt + luma(200), // vertical stroke for indentation guide
   line-numbers: true, // show line numbers
-  line-numbers-format: num => str(num) + "|", // change the line numbers format
+  line-numbers-format: x => [#x:], // change the line numbers format
   { // provide an array
     import algorithmic: * // import all names in the array
     Assign[$x$][$y$]
@@ -98,7 +98,7 @@ If you want to customize line numbers, you can pass a function, that takes a num
 ```
 ![image of the algorithm with three lines of code assigning x to y, y to x, and z to x + y. The inset is set to 1em, the indent to 0.5em](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/algorithm/ref/1.png)
 
-#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, line-numbers-format: none, ..bits)`
+#### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, line-numbers-format: x => [#x:], ..bits)`
 
 The `algorithm-figure` function is a wrapper around `algorithm` that returns a
 figure element of the algorithm. It takes the same parameters as

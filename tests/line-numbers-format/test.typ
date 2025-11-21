@@ -1,6 +1,6 @@
 #import "../../algorithmic.typ"
 #import algorithmic: *
-#set page(margin: .1cm, width: 10cm, height: auto)
+#set page(margin: .1cm, width: 2cm, height: auto)
 
 #algorithm(
   line-numbers-format: num => str(num) + "|",
