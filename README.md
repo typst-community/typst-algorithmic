@@ -14,12 +14,12 @@ for Typst. It's useful for writing pseudocode and typesetting it all nicely.
 [algorithmicx]: https://ctan.org/pkg/algorithmicx
 
 ![screenshot of the typst-algorithmic output, showing line numbers, automatic
-indentation, bolded keywords, and such](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/docs/assets/algorithmic-demo.png)
+indentation, bolded keywords, and such](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/docs/assets/algorithmic-demo.png)
 
 Example:
 
 ```typst
-#import "@preview/algorithmic:1.0.6"
+#import "@preview/algorithmic:1.0.7"
 #import algorithmic: style-algorithm, algorithm-figure
 #show: style-algorithm
 #algorithm-figure(
@@ -96,7 +96,7 @@ If you want to customize line numbers, you can pass a function, that takes a num
   }
 )
 ```
-![image of the algorithm with three lines of code assigning x to y, y to x, and z to x + y. The inset is set to 1em, the indent to 0.5em](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/algorithm/ref/1.png)
+![image of the algorithm with three lines of code assigning x to y, y to x, and z to x + y. The inset is set to 1em, the indent to 0.5em](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/algorithm/ref/1.png)
 
 #### `algorithm-figure(title, supplement: "Algorithm", inset: 0.2em, indent: 0.5em, vstroke: 0pt + luma(200), line-numbers: true, line-numbers-format: x => [#x:], ..bits)`
 
@@ -158,7 +158,7 @@ An example of how to style the algorithm figure:
 )
 ```
 which will result in something like
-![image of the binary search algorithm with a right-aligned and italics figure caption enclosed within a red and blue 2pt grid horizontal lines. The algorithm is finally ended with a green 2pt horizontal line](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/style-2/ref/1.png).
+![image of the binary search algorithm with a right-aligned and italics figure caption enclosed within a red and blue 2pt grid horizontal lines. The algorithm is finally ended with a green 2pt horizontal line](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/style-2/ref/1.png).
 
 #### Control flow
 
@@ -188,7 +188,7 @@ If($x < y$, {
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/if/ref/1.png" alt="image of an if statement with condition x < y and conditional statement assign y to x" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/if/ref/1.png" alt="image of an if statement with condition x < y and conditional statement assign y to x" width="500"></td>
 </tr>
 <tr>
 <td><code>ElseIf</code></td>
@@ -202,7 +202,7 @@ ElseIf($x > y$, {
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/elseif/ref/1.png" alt="image of an elseif statement with condition x > y and conditional statement assign x to y" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/elseif/ref/1.png" alt="image of an elseif statement with condition x > y and conditional statement assign x to y" width="500"></td>
 </tr>
 <tr>
 <td><code>Else</code></td>
@@ -216,7 +216,7 @@ Else({
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/else/ref/1.png" alt="image of an else statement with conditional statement return y" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/else/ref/1.png" alt="image of an else statement with conditional statement return y" width="500"></td>
 </tr>
 <tr>
 <td><code>While</code></td>
@@ -230,7 +230,7 @@ While($i < 10$, {
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/while/ref/1.png" alt="image of a while statement with condition i < 10 and conditional statement assign i + 1 to i" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/while/ref/1.png" alt="image of a while statement with condition i < 10 and conditional statement assign i + 1 to i" width="500"></td>
 </tr>
 <tr>
 <td><code>For</code></td>
@@ -244,7 +244,7 @@ For($i <= 10$, {
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/for/ref/1.png" alt="image of a for loop with condition i <= 10 and conditional statement assign i to x_i" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/for/ref/1.png" alt="image of a for loop with condition i <= 10 and conditional statement assign i to x_i" width="500"></td>
 </tr>
 <tr>
 <td><code>IfElseChain</code></td>
@@ -266,7 +266,7 @@ IfElseChain( // Alternating content and bits
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/ifelsechain/ref/1.png" alt="image of an ifelsechain statement with condition x < y and conditional statement assign y to x, then condition x" width="500"></td>
 </tr>
 <tr>
 <td><code>IfElseInline</code></td>
@@ -278,7 +278,7 @@ Assign($m$, IfElseInline($x < y$, $x$, $y$))
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/ifelseinline/ref/1.png" alt="image of an ifelseinline expression with condition x < y, true expression x, and false expression y being assigned to m" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/ifelseinline/ref/1.png" alt="image of an ifelseinline expression with condition x < y, true expression x, and false expression y being assigned to m" width="500"></td>
 </tr>
 </tbody>
 </table>
@@ -310,7 +310,7 @@ Assign[$a$][$b$]
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/function/ref/1.png" alt="image of a function definition with name 'Add' and arguments 'a' and 'b' with body 'return a+b'" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/function/ref/1.png" alt="image of a function definition with name 'Add' and arguments 'a' and 'b' with body 'return a+b'" width="500"></td>
 </tr>
 <tr>
 <td><code>Procedure</code></td>
@@ -324,7 +324,7 @@ Assign[$a$][$a+b$]
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/procedure/ref/1.png" alt="image of a procedure definition with name 'Add' and arguments 'a' and 'b' with body 'assign a+b to a'" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/procedure/ref/1.png" alt="image of a procedure definition with name 'Add' and arguments 'a' and 'b' with body 'assign a+b to a'" width="500"></td>
 </tr>
 <tr>
 <td><code>Assign</code></td>
@@ -336,7 +336,7 @@ Assign[$x$][$y$]
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/assign/ref/1.png" alt="image of an assignment statement assigning y to x" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/assign/ref/1.png" alt="image of an assignment statement assigning y to x" width="500"></td>
 </tr>
 <tr>
 <td><code>Return</code></td>
@@ -348,7 +348,7 @@ Return[$x$]
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/return/ref/1.png" alt="image of a return statement returning x" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/return/ref/1.png" alt="image of a return statement returning x" width="500"></td>
 </tr>
 <tr>
 <td><code>Terminate</code></td>
@@ -360,7 +360,7 @@ Terminate[$x$]
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/terminate/ref/1.png" alt="image of a terminate statement terminating x" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/terminate/ref/1.png" alt="image of a terminate statement terminating x" width="500"></td>
 </tr>
 <tr>
 <td><code>Break</code></td>
@@ -372,7 +372,7 @@ Break()
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/break/ref/1.png" alt="image of a break statement" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/break/ref/1.png" alt="image of a break statement" width="500"></td>
 </tr>
 </tbody>
 </table>
@@ -392,7 +392,7 @@ Users can also define their own commands using both `Call(..args)` and
   Assign($y$, mean[$x$])
 })
 ```
-![image of a custom call "Solve" given parameters "A" and "b" and a custom function "mean" given parameter "x" in the algorithmic environment. The call "Solve" is rendered in smallcaps and the function "mean" is rendered in a strong emphasis.](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/docs/assets/custom-call-function.png)
+![image of a custom call "Solve" given parameters "A" and "b" and a custom function "mean" given parameter "x" in the algorithmic environment. The call "Solve" is rendered in smallcaps and the function "mean" is rendered in a strong emphasis.](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/docs/assets/custom-call-function.png)
 
 #### Standalone lines and line breaks
 
@@ -405,7 +405,7 @@ You can use `Line` to create a standalone line and `LineBreak` to insert a line 
   LineBreak
 })
 ```
-![image of a standalone line with content "1+1" and a line break in the algorithmic environment](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/line/ref/1.png)
+![image of a standalone line with content "1+1" and a line break in the algorithmic environment](https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/line/ref/1.png)
 
 
 #### Comments
@@ -436,7 +436,7 @@ Comment[This is a comment]
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/comment/ref/1.png" alt="image of a block comment with text 'This is a comment'" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/comment/ref/1.png" alt="image of a block comment with text 'This is a comment'" width="500"></td>
 </tr>
 <tr>
 <td><code>CommentInline</code></td>
@@ -448,7 +448,7 @@ CommentInline[This is a comment]
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/commentinline/ref/1.png" alt="image of an inline comment with text 'This is a comment'" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/commentinline/ref/1.png" alt="image of an inline comment with text 'This is a comment'" width="500"></td>
 </tr>
 <tr>
 <td><code>LineComment</code></td>
@@ -460,7 +460,7 @@ LineComment(Assign[a][1], [Initialize $a$ to 1])
 ```
 
 </td>
-<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.6/tests/linecomment/ref/1.png" alt="image of a line comment with text 'Initialize a to 1'" width="500"></td>
+<td><img src="https://raw.githubusercontent.com/typst-community/typst-algorithmic/refs/tags/v1.0.7/tests/linecomment/ref/1.png" alt="image of a line comment with text 'Initialize a to 1'" width="500"></td>
 </tr>
 </tbody>
 </table>
