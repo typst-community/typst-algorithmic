@@ -3,6 +3,15 @@
 ## v1.0.7
 
 > [!NOTE]
+> @JL170 added an option to customize line number formatting (#32).
+> ```typ
+> #algorithm(
+> line-numbers-format: x => [#x:],
+> { ... }
+> )
+> ```
+
+> [!NOTE]
 > @avlouis added inline command `IfElseInline` for ternary if-then-else statements (#31).
 > ```typ
 > #{
