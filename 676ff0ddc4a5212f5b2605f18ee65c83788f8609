@@ -1,0 +1,11 @@
+[ver:1,total:1860]
+.gtm/terminal.app:904,1763226000:670,1763884800:234,r
+algorithmic.typ:290,1763226000:290,r
+.github/workflows/test.yml:180,1763283600:180,r
+tests/algorithm-float/test.typ:105,1763226000:105,r
+NEWS.md:102,1763884800:102,m
+tests/line-numbers/test.typ:100,1763226000:100,r
+.gitignore:75,1763226000:75,r
+README.md:64,1763226000:40,1763884800:24,r
+docs/algorithmic-demo.typ:20,1763226000:20,r
+tests/algorithm/test.typ:20,1763226000:20,r
