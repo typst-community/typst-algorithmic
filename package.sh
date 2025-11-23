@@ -1,5 +1,9 @@
 #!/bin/bash
 # package all files except the ones mentioned in exclude list in typst.toml
+# Package release steps:
+# 1. tbump
+# 2. Create release
+# 3. ./package.sh
 
 exclude_patterns=$(awk '/exclude = \[/,/\]/ {if ($0 !~ /exclude = \[/ && $0 !~ /\]/) print $0}' typst.toml | sed 's/[",]//g' | sed 's/^[ \t]*//' | sed 's/\/$//')
 tar_args=$(while IFS= read -r line; do echo " --exclude=$line"; done <<<"$exclude_patterns")
